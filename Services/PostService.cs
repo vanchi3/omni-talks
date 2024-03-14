@@ -39,7 +39,6 @@ namespace OmniTalks.Services
                 Content = x.Content,
                 UserId = x.UserId,
                 User = x.User,
-                PostLikes = x.PostLikes,
                 Comments = x.Comments
 
             })

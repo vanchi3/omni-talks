@@ -77,8 +77,15 @@
                 <button class="d-center gap-1 gap-sm-2 mdtxt">
                     <i class="material-symbols-outlined mat-icon"> favorite </i>
                     Like
+                    @{
+                        PostLikeViewModel addLikeVM = new PostLikeViewModel()
+                        {
+                            PostId = item.Id
+                        };
+                    }
+                    <partial name="_AddLikeForm" model="addLikeVM">
                 </button>
-                <button class="d-center gap-1 gap-sm-2 mdtxt">
+                <button class="d-center gap-1 gap-sm-2 mdtxt" asp-action="">
                     <i class="material-symbols-outlined mat-icon"> chat </i>
                     Comment
                 </button>

@@ -10,7 +10,6 @@ namespace OmniTalks.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private IPostService _postService;
-
         public HomeController(ILogger<HomeController> logger,IPostService postService)
         {
             _logger = logger;
@@ -24,7 +23,12 @@ namespace OmniTalks.Controllers
             List<PostViewModel> models = await this._postService.All();
             return View(models);
         }
-
+        //[HttpPost]
+        //public async Task<IActionResult> Like(PostLikeViewModel postLikeVM)
+        //{
+        //    await this._likeService.Add(postLikeVM);
+        //    return RedirectToAction("Index", "Home");
+        //}
         public IActionResult Privacy()
         {
             return View();
