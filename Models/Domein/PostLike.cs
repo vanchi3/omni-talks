@@ -5,9 +5,7 @@ namespace OmniTalks.Models.Domein
 {
 	public class PostLike
 	{
-		public Guid Id { get; set; }
-		
-		[ForeignKey(nameof(Domein.User))]	
+		[ForeignKey(nameof(Domein.User))]
 		public Guid UserId { get; set; }
         public User User { get; set; }
 		public Guid PostId { get; set; }

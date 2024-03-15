@@ -39,15 +39,18 @@ namespace OmniTalks.Data
                 .WithMany(p => p.Comments)
                 .HasForeignKey(c => c.PostId)
                 .OnDelete(DeleteBehavior.NoAction);
-            
+
             // ok!
             builder.Entity<PostLike>()
                 .HasOne<Post>(l => l.Post)
                 .WithMany(p => p.PostLikes)
                 .HasForeignKey(c => c.PostId)
                 .OnDelete(DeleteBehavior.NoAction);
-               
-            builder.Entity<CommentLike>()
+
+            builder.Entity<PostLike>()
+				.HasKey(pl => new { pl.UserId, pl.PostId });
+
+			builder.Entity<CommentLike>()
                 .HasOne<Comment>(c => c.Comment)
                 .WithMany(p => p.CommentLikes)
                 .HasForeignKey(c => c.CommentId)

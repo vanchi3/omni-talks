@@ -1,4 +1,8 @@
 ﻿@model PostLikeViewModel
-<form asp-action="AddLike" asp-controller="Like">
-	@Model.UserId = CurrentUserId
+<form asp-action="Like" asp-controller="Like">
+	<input type="hidden" asp-for="@Model.PostId" />
+	<button type="submit" class="d-center gap-1 gap-sm-2 mdtxt">
+		<i class="material-symbols-outlined mat-icon"></i>
+		<i class="material-symbols-outlined mat-icon"> favorite </i> Like
+	</button>
 </form>

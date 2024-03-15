@@ -4,9 +4,9 @@ using OmniTalks.Models;
 
 namespace OmniTalks.Controllers
 {
-    public class LikeController : Controller
+    public class LikeController : BaseController
     {
-        private ILikeService _likeService;
+        private readonly ILikeService _likeService;
 
         public LikeController(ILikeService likeService)
         {
@@ -16,7 +16,7 @@ namespace OmniTalks.Controllers
         [HttpPost]
         public async Task<IActionResult> Like(PostLikeViewModel postLikeVM)
         {
-            await this._likeService.Add(postLikeVM);
+            await this._likeService.Add(postLikeVM,CurrentUserId);
             return RedirectToAction("Index", "Home");
         }
     }

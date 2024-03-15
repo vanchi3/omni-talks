@@ -34,12 +34,6 @@ namespace OmniTalks.Controllers
             await this.postService.Add(model, currtentId);
 			return RedirectToAction("Index", "Home");
 		}
-        [HttpGet]
-        public async Task<IActionResult> All()
-        {
-            ViewBag.UserName = UserName;
-           var models =  await this.postService.All();
-            return RedirectToAction("Index", "Home",models);
-        }
+        
     }
 }

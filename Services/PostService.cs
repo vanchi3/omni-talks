@@ -8,45 +8,52 @@ using System.Security.Claims;
 
 namespace OmniTalks.Services
 {
-    public class PostService:IPostService
-    {
-        public ApplicationDbContext _context;
+	public class PostService : IPostService
+	{
+		public ApplicationDbContext _context;
 
-        public PostService(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+		public PostService(ApplicationDbContext context)
+		{
+			_context = context;
+		}
 
-        public async Task Add(PostViewModel model,string currentId)
-        {
-            Post post = new Post()
-            {
-                Id = Guid.NewGuid(),
-                Content = model.Content,
-                UserId = Guid.Parse(currentId)
-            };
+		public async Task Add(PostViewModel model, string currentId)
+		{
+			Post post = new Post()
+			{
+				Id = Guid.NewGuid(),
+				Content = model.Content,
+				UserId = Guid.Parse(currentId)
+			};
 
-            await _context.Posts.AddAsync(post);
-            await _context.SaveChangesAsync();
-        }
+			await _context.Posts.AddAsync(post);
+			await _context.SaveChangesAsync();
+		}
 
-        public async Task<List<PostViewModel>> All()
-        {
-            var posts = await _context.Posts.ToListAsync();
+		public async Task<List<PostViewModel>> All()
+		{
+			var posts = await _context.Posts
+				.Include(p => p.PostLikes)
+				.Include(p => p.Comments)
+				.ToListAsync();
 
-            var  postViewModels = posts.Select(x => new PostViewModel()
-            {
-                Content = x.Content,
-                UserId = x.UserId,
-                User = x.User,
-                Comments = x.Comments
+			var postViewModels = posts.Select(p => new PostViewModel()
+			{
+				Id = p.Id,
+				Content = p.Content,
+				UserId = p.UserId,
+				User = p.User,
+				Comments = p.Comments,
+				PostLikes = p.PostLikes.Select(pl => new PostLikeViewModel()
+				{
+					PostId = p.Id
+				}).ToList()
+			})
+			.ToList();
 
-            })
-            .ToList();
+			return postViewModels;
+		}
 
-            return postViewModels;
-        }
-      
-    }
+	}
 }
 
