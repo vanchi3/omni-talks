@@ -47,7 +47,7 @@ namespace OmniTalks.Controllers
 		{
 			PostViewModel model = new PostViewModel();
 
-			return RedirectToAction("EditPostFrom",model);
+			return View(model);
 		}
 		[HttpPost]
 		[Authorize]
