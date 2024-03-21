@@ -54,6 +54,28 @@ namespace OmniTalks.Services
 			return postViewModels;
 		}
 
+		public async Task Edit(PostViewModel model, Guid id)
+		{
+			Post post = await this._context.Posts.FindAsync(id);
+			post.Content = model.Content;
+			post.User = model.User;
+			post.UserId = model.UserId;
+			post.Comments = model.Comments;
+
+			await _context.SaveChangesAsync();
+		}
+
+		public async Task Remove(Guid id) 
+		{
+
+
+			var post = await _context.Posts
+				.FirstOrDefaultAsync(x => x.Id == id);
+			
+			_context.Posts.Remove(post);
+			await _context.SaveChangesAsync();
+		}
+
 	}
 }
 

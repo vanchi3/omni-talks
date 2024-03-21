@@ -6,6 +6,8 @@ namespace OmniTalks.Contracs
     {
         public Task Add(PostViewModel model,string currentId);
         public Task<List<PostViewModel>> All();
+        public Task Remove(Guid id);
+        public Task Edit(PostViewModel model, Guid id);
 
-    }
+	}
 }

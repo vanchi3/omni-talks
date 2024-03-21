@@ -1,0 +1,59 @@
+﻿@model PostViewModel
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Circlehub">
+    <meta name="description" content="Circlehub HTML5 Template">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Circlehub - HTML Templates</title>
+
+    <link rel="shortcut icon" href="assets/images/fav.png" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <div class="share-post d-flex gap-3 gap-sm-5 p-3 p-sm-5">
+        <div class="profile-box">
+            <a href="#"><img src="/images/add-post-avatar.png" class="max-un" alt="icon"></a>
+        </div>
+        <form asp-action="Add" asp-controller="Post" class="w-100 position-relative">
+            <textarea asp-for="Content" cols="10" rows="2" placeholder="Write something to Lerio.."></textarea>
+            <div class="abs-area position-absolute d-none d-sm-block">
+                <i class="material-symbols-outlined mat-icon xxltxt"> sentiment_satisfied </i>
+            </div>
+            <ul class="d-flex justify-content-between flex-wrap mt-3 gap-3">
+                <li class="d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#goLiveMod">
+                    <img src="/images/icon/live-video.png" class="max-un" alt="icon">
+                    <span>Live</span>
+                </li>
+                <li class="d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#photoVideoMod">
+                    <img src="/images/icon/vgallery.png" class="max-un" alt="icon">
+                    <span>Photo/Video</span>
+                </li>
+                <li class="d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#activityMod">
+                    <img src="/images/icon/emoji-laughing.png" class="max-un" alt="icon">
+                    <span>Fallings/Activity</span>
+                </li>
+                <li>
+                    <button class="cmn-btn px-2 px-sm-5 px-lg-6">
+                        <i class="material-symbols-outlined mat-icon m-0 fs-xxl"> near_me </i>
+                    </button>
+                </li>
+            </ul>
+        </form>
+
+    </div>
+    <!-- Go Live Popup end -->
+    <!--==================================================================-->
+    <script src="assets/js/plugins/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/plugins/slick.js"></script>
+    <script src="assets/js/plugins/jquery.nice-select.min.js"></script>
+    <script src="assets/js/plugins/plyr.js"></script>
+    <script src="assets/js/plugins/apexcharts.js"></script>
+    <script src="assets/js/plugins/wow.min.js"></script>
+    <script src="assets/js/plugins/plugin.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>

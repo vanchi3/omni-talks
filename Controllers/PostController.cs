@@ -34,6 +34,28 @@ namespace OmniTalks.Controllers
             await this.postService.Add(model, currtentId);
 			return RedirectToAction("Index", "Home");
 		}
-        
-    }
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Remove(Guid id)
+        {
+            await this.postService.Remove(id);
+			return RedirectToAction("Index", "Home");
+		}
+		[HttpGet]
+		[Authorize]
+		public IActionResult Edit()
+		{
+			PostViewModel model = new PostViewModel();
+
+			return RedirectToAction("EditPostFrom",model);
+		}
+		[HttpPost]
+		[Authorize]
+		public async Task<IActionResult> Edit(PostViewModel model,Guid id)
+		{
+			string currtentId = CurrentUserId;
+			await this.postService.Edit(model,id);
+			return RedirectToAction("Index", "Home");
+		}
+	}
 }

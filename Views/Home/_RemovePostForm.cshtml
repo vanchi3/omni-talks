@@ -1,0 +1,7 @@
+﻿@model PostViewModel
+<form asp-action="Remove" asp-controller="Post">
+	<input type="hidden" asp-for="@Model.Id" />
+	<button type="submit" class="d-center gap-1 gap-sm-2 mdtxt">
+		<i class="fa-solid fa-xmark"></i> Remove Post
+	</button>
+</form>

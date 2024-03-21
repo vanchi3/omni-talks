@@ -12,5 +12,8 @@ namespace OmniTalks.Models.Domein
         public List<Message> SentMessages { get; set; }
         public List<Message> RecievedMessages { get; set; }
         public List<Post> Posts { get; set; }
+
+        // ako sh triesh useri taka ->
+        //public bool IsDeleted{ get; set; }
     }
 }
