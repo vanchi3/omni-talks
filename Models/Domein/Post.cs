@@ -8,16 +8,19 @@ namespace OmniTalks.Models.Domein
         [Key]
         public Guid Id { get; set; }
 
-        public string Content { get; set; }
-        //public string ImgUrl { get; set; }
-        
-        [ForeignKey(nameof(Domein.User))]
+        [Required]
+        public string Content { get; set; } = null!;
+
+        [Required]
+        [ForeignKey(nameof(User))]
         public Guid UserId { get; set; }
-        
-        public User User{ get; set; }
-        
-        public List<PostLike>  PostLikes { get; set; }  
-        
-        public List<Comment> Comments { get; set; }  
+
+        public User User { get; set; } = null!;
+
+        public List<PostLike> PostLikes { get; set; } = [];
+
+        public List<Comment> Comments { get; set; } = [];
+
+        //public string ImgUrl { get; set; }
     }
 }

@@ -6,9 +6,12 @@ namespace OmniTalks.Models.Domein
 {
 	public class Connection
 	{
-
+        [Key]
         public Guid Id { get; set; }
-        public string Status { get; set; }
-        public List<UserConnection> UserConnections { get; set; }
+
+        [Required]
+        public string Status { get; set; } = null!;
+
+        public List<UserConnection> UserConnections { get; set; } = [];
     }
 }

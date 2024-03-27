@@ -5,15 +5,15 @@ namespace OmniTalks.Models.Domein
 {
 	public class UserConnection
 	{
-		
+		[Key]
 		public Guid Id { get; set; }
 	
-		[ForeignKey(nameof(Domein.Connection))]
+		[ForeignKey(nameof(Connection))]
 		public Guid ConnectonId { get; set; }
-        public Connection Connection { get; set; }
+		public Connection Connection { get; set; } = null!;
 
-        [ForeignKey(nameof(Domein.User))]
+        [ForeignKey(nameof(User))]
 		public Guid UserId { get; set; }
-        public User User { get; set; }
+		public User User { get; set; } = null!;
     }
 }

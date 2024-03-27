@@ -11,6 +11,7 @@ namespace OmniTalks.Data
 			: base(options)
 		{
 		}
+
 		public DbSet<Post> Posts { get; set; }
 		public DbSet<Message> Messages { get; set; }
 		public DbSet<Connection> Connections { get; set; }
@@ -21,6 +22,7 @@ namespace OmniTalks.Data
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
+			// Fix Scaffolding
 			builder.Entity<User>()
 				.HasMany(u => u.Comments)
 				.WithOne(c => c.User)
@@ -51,11 +53,14 @@ namespace OmniTalks.Data
 				.HasForeignKey(cm => cm.UserId)
 				.OnDelete(DeleteBehavior.NoAction);
 
+			// Composite Keys
 			builder.Entity<PostLike>()
 					.HasKey(pl => new { pl.UserId, pl.PostId });
 
-			base.OnModelCreating(builder);
+            builder.Entity<CommentLike>()
+                    .HasKey(pl => new { pl.UserId, pl.CommentId });
 
+            base.OnModelCreating(builder);
 		}
 	}
 }
