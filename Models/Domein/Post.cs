@@ -5,13 +5,19 @@ namespace OmniTalks.Models.Domein
 {
     public class Post
     {
+        [Key]
         public Guid Id { get; set; }
+
         public string Content { get; set; }
         //public string ImgUrl { get; set; }
+        
         [ForeignKey(nameof(Domein.User))]
         public Guid UserId { get; set; }
+        
         public User User{ get; set; }
+        
         public List<PostLike>  PostLikes { get; set; }  
+        
         public List<Comment> Comments { get; set; }  
     }
 }

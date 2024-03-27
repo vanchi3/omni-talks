@@ -27,5 +27,11 @@ namespace OmniTalks.Controllers
 			await this._service.Add(model,currentId);
 			return RedirectToAction("Index", "Home");
 		}
+		[HttpGet]
+		public async Task<IActionResult> _ShowComments()
+		{
+			List<CommentViewModel> vms = new List<CommentViewModel>();
+			return View(vms);
+		}
 	}
 }

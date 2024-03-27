@@ -34,7 +34,9 @@ namespace OmniTalks.Services
 		{
 			var posts = await _context.Posts
 				.Include(p => p.PostLikes)
+				.Include(p => p.User)
 				.Include(p => p.Comments)
+				.ThenInclude(c => c.User)
 				.ToListAsync();
 
 			var postViewModels = posts.Select(p => new PostViewModel()
@@ -42,8 +44,16 @@ namespace OmniTalks.Services
 				Id = p.Id,
 				Content = p.Content,
 				UserId = p.UserId,
-				User = p.User,
-				Comments = p.Comments,
+				UserName = p.User.UserName,
+				Comments = p.Comments.Select(c => new CommentViewModel()
+				{
+					Id = c.Id,
+					Text = c.Text,
+					CommentLikes = c.CommentLikes,
+					PostId = p.Id,
+					UserId = c.UserId,
+					UserName = c.User.UserName
+				}).ToList(),
 				PostLikes = p.PostLikes.Select(pl => new PostLikeViewModel()
 				{
 					PostId = p.Id
@@ -58,9 +68,6 @@ namespace OmniTalks.Services
 		{
 			Post post = await this._context.Posts.FindAsync(id);
 			post.Content = model.Content;
-			post.User = model.User;
-			post.UserId = model.UserId;
-			post.Comments = model.Comments;
 
 			await _context.SaveChangesAsync();
 		}

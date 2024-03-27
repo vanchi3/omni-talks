@@ -8,12 +8,9 @@ namespace OmniTalks.Models
 		public Guid Id { get; set; }
 		public string Text { get; set; }
 		public Guid PostId { get; set; }
-		public Post Post { get; set; }
-
-		[ForeignKey(nameof(Domein.User))]
 		public Guid UserId { get; set; }
-		public User User { get; set; }
 
-		public List<CommentLike> CommentLikes { get; set; }
+        public string UserName { get; set; }
+        public List<CommentLike> CommentLikes { get; set; }
 	}
 }
