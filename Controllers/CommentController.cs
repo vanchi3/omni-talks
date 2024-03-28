@@ -21,10 +21,16 @@ namespace OmniTalks.Controllers
 		//	return View(model);
 		//}
 		[HttpPost]
-		public async Task<IActionResult> Add(CommentViewModel model)
+		public async Task<IActionResult> Add(AddCommentViewModel model)
 		{
 			string currentId = CurrentUserId;
 			await this._service.Add(model,currentId);
+			return RedirectToAction("Index", "Home");
+		}
+		[HttpPost]
+		public async Task<IActionResult> Edit(CommentViewModel model)
+		{
+			await this._service.Edit(model);
 			return RedirectToAction("Index", "Home");
 		}
 		[HttpGet]
@@ -32,6 +38,21 @@ namespace OmniTalks.Controllers
 		{
 			List<CommentViewModel> vms = new List<CommentViewModel>();
 			return View(vms);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Remove(CommentViewModel model)
+		{
+			await this._service.Remove(model.Id);
+			return RedirectToAction("Index", "Home");
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> AddLike(CommentLikeViewModel model)
+		{
+			string id = CurrentUserId;
+			await _service.AddLike(model, id);
+			return RedirectToAction("Index", "Home");
 		}
 	}
 }

@@ -11,24 +11,22 @@ namespace OmniTalks.Controllers
 {
     public class UserController : BaseController
     {
-        private readonly UserManager<User> userManager;
+        private readonly UserManager<User> _userManger;
+        private readonly SignInManager<User> _signInManager;
+        private readonly RoleManager<User> _roleManager;
+        private readonly ApplicationDbContext _context;
 
-        private readonly SignInManager<User> signInManager;
-        private readonly    RoleManager<User> _roleManager;
-
-        private readonly ApplicationDbContext context;
-
-        public UserController(UserManager<User> userManager, SignInManager<User> signInManager, ApplicationDbContext _context,RoleManager<User> roleManager)
+        public UserController(
+            UserManager<User> userManager,
+            SignInManager<User> signInManager,
+            ApplicationDbContext context,
+            RoleManager<User> roleManager)
         {
-            this.userManager = userManager;
-            this.signInManager = signInManager;
-            this._roleManager = roleManager;
-            this.context = _context;
-            Console.WriteLine("User Id: " + User.FindFirstValue(ClaimTypes.NameIdentifier));
-            Console.WriteLine("Username: " + User.FindFirstValue(ClaimTypes.Name));
+            _userManger = userManager;
+            _signInManager = signInManager;
+            _roleManager = roleManager;
+            _context = context;
         }
-
-
 
         [HttpGet]
         [AllowAnonymous]
@@ -58,7 +56,7 @@ namespace OmniTalks.Controllers
                 Email = model.Email,
                 UserName = model.UserName
             };
-            var result = await userManager.CreateAsync(user, model.Password);
+            var result = await _userManger.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
@@ -92,11 +90,11 @@ namespace OmniTalks.Controllers
             {
                 return View(model);
             }
-            var user = await context.Users.Where(x => x.UserName == model.UserName).FirstOrDefaultAsync();
+            var user = await _context.Users.Where(x => x.UserName == model.UserName).FirstOrDefaultAsync();
 
             if (user != null)
             {
-                var result = await signInManager.PasswordSignInAsync(user, model.Password, true, true);
+                var result = await _signInManager.PasswordSignInAsync(user, model.Password, true, true);
 
                 if (result.Succeeded)
                 {
@@ -108,7 +106,7 @@ namespace OmniTalks.Controllers
         }
         public async Task<IActionResult> Logout()
         {
-            await signInManager.SignOutAsync();
+            await _signInManager.SignOutAsync();
 
             return RedirectToAction("Index", "Home");
         }

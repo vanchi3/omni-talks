@@ -70,9 +70,9 @@
 				<div class="py-4">
 					<p class="description">@item.Content</p>
 				</div>
-				<div class="post-img">
+				@* <div class="post-img">
 					<img src="/images/post-img-1.png" class="w-100" alt="image">
-				</div>
+				</div> *@
 			</div>
 			<div class="total-react-share pb-4 d-center gap-2 flex-wrap justify-content-between">
 				<div class="friends-list d-flex gap-3 align-items-center text-center">
@@ -86,7 +86,7 @@
 				<div class="react-list d-flex flex-wrap gap-6 align-items-center text-center">
 					<button class="mdtxt">@item.Comments.Count Comments</button>
 					<button class="mdtxt">1 Shares</button>
-					<button class="mdtxt">@item.PostLikes.Count Likes </button>
+					<button class="mdtxt">@item.LikesCount Likes </button>
 				</div>
 			</div>
 			<div class="like-comment-share py-5 d-center flex-wrap gap-3 gap-md-0 justify-content-between">
@@ -105,10 +105,10 @@
 					</button>
 			</div>
 			@{
-				CommentViewModel cVM = new CommentViewModel();
-				cVM.PostId = item.Id;
+				AddCommentViewModel addCommentViewModel = new AddCommentViewModel();
+				addCommentViewModel.PostId = item.Id;
 			}
-			<partial name="_AddComment" model="cVM">
+			<partial name="_AddComment" model="addCommentViewModel">
 
 			<partial name="_ShowComments" model="item.Comments">
 		</div>

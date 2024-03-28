@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using OmniTalks.Contracs;
+using OmniTalks.Controllers;
 using OmniTalks.Data;
 using OmniTalks.Models.Domein;
 using OmniTalks.Services;

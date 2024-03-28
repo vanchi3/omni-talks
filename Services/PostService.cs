@@ -10,7 +10,7 @@ namespace OmniTalks.Services
 {
 	public class PostService : IPostService
 	{
-		public ApplicationDbContext _context;
+		private readonly ApplicationDbContext _context;
 
 		public PostService(ApplicationDbContext context)
 		{
@@ -32,34 +32,26 @@ namespace OmniTalks.Services
 
 		public async Task<List<PostViewModel>> All()
 		{
-			var posts = await _context.Posts
+			List<PostViewModel> postViewModels = await _context.Posts
 				.Include(p => p.PostLikes)
 				.Include(p => p.User)
 				.Include(p => p.Comments)
 				.ThenInclude(c => c.User)
-				.ToListAsync();
-
-			var postViewModels = posts.Select(p => new PostViewModel()
-			{
-				Id = p.Id,
-				Content = p.Content,
-				UserId = p.UserId,
-				UserName = p.User.UserName,
-				Comments = p.Comments.Select(c => new CommentViewModel()
-				{
-					Id = c.Id,
-					Text = c.Text,
-					CommentLikes = c.CommentLikes,
-					PostId = p.Id,
-					UserId = c.UserId,
-					UserName = c.User.UserName
-				}).ToList(),
-				PostLikes = p.PostLikes.Select(pl => new PostLikeViewModel()
-				{
-					PostId = p.Id
-				}).ToList()
-			})
-			.ToList();
+                .Select(p => new PostViewModel()
+                {
+                    Id = p.Id,
+                    Content = p.Content,
+                    UserName = p.User.UserName,
+                    Comments = p.Comments.Select(c => new CommentViewModel()
+                    {
+                        Id = c.Id,
+                        Text = c.Text,
+                        UserName = c.User.UserName,
+                        LikesCount = c.CommentLikes.Count(),
+                    }).ToList(),
+                    LikesCount = p.PostLikes.Count()
+                })
+                .ToListAsync();
 
 			return postViewModels;
 		}
@@ -74,15 +66,12 @@ namespace OmniTalks.Services
 
 		public async Task Remove(Guid id) 
 		{
-
-
 			var post = await _context.Posts
 				.FirstOrDefaultAsync(x => x.Id == id);
 			
 			_context.Posts.Remove(post);
 			await _context.SaveChangesAsync();
 		}
-
 	}
 }
 

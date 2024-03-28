@@ -11,16 +11,16 @@ namespace OmniTalks.Controllers
     public class AdministrationController : Controller
     {
         private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
+        private readonly ApplicationDbContext _context;
 
-        private readonly SignInManager<User> signInManager;
-
-        private readonly ApplicationDbContext context;
-
-        public AdministrationController(UserManager<User> userManager, SignInManager<User> signInManager, ApplicationDbContext _context)
+        public AdministrationController(UserManager<User> userManager,
+            SignInManager<User> signInManager,
+            ApplicationDbContext context)
         {
             this._userManager = userManager;
-            this.signInManager = signInManager;
-            this.context = _context;
+            this._signInManager = signInManager;
+            this._context = context;
             Console.WriteLine("User Id: " + User.FindFirstValue(ClaimTypes.NameIdentifier));
             Console.WriteLine("Username: " + User.FindFirstValue(ClaimTypes.Name));
         }

@@ -11,11 +11,9 @@ namespace OmniTalks.Models
         
         public string ImgUrl { get; set; }
         
-        public Guid UserId { get; set; }
-        
         public string UserName { get; set; }
         
-        public List<PostLikeViewModel> PostLikes { get; set; }
+        public int LikesCount { get; set; }
         
         public List<CommentViewModel> Comments { get; set; }
     }
