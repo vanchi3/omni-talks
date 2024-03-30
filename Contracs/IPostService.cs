@@ -1,4 +1,5 @@
 ﻿using OmniTalks.Models;
+using OmniTalks.Models.Domein;
 
 namespace OmniTalks.Contracs
 {
@@ -6,8 +7,10 @@ namespace OmniTalks.Contracs
     {
         public Task Add(PostViewModel model,string currentId);
         public Task<List<PostViewModel>> All();
-        public Task Remove(Guid id);
+        public Task Remove(Guid id,Guid userId);
         public Task Edit(PostViewModel model, Guid id);
+        public Task<PostViewModel> Rewrite(Guid id);
+        public Task<Post> GetById(Guid id);
 
 	}
 }

@@ -24,15 +24,33 @@ namespace OmniTalks.Controllers
 		public async Task<IActionResult> Add(AddCommentViewModel model)
 		{
 			string currentId = CurrentUserId;
-			await this._service.Add(model,currentId);
+			await this._service.Add(model, currentId);
 			return RedirectToAction("Index", "Home");
+		}
+		[HttpGet]
+		public async Task<IActionResult> Edit(Guid id)
+		{
+			Guid userId = new Guid(CurrentUserId);
+			Guid commenterId = await this._service.GetById(id);
+			if(commenterId == userId)
+			{
+				CommentViewModel model = await this._service.Rewrite(id);
+
+				return View(model);
+			}
+			else
+			{
+				return RedirectToAction("Index", "Home");
+			}
 		}
 		[HttpPost]
 		public async Task<IActionResult> Edit(CommentViewModel model)
 		{
+			
 			await this._service.Edit(model);
 			return RedirectToAction("Index", "Home");
 		}
+
 		[HttpGet]
 		public async Task<IActionResult> _ShowComments()
 		{
@@ -43,7 +61,8 @@ namespace OmniTalks.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Remove(CommentViewModel model)
 		{
-			await this._service.Remove(model.Id);
+			Guid userId = new Guid(CurrentUserId);
+			await this._service.Remove(model.Id,userId);
 			return RedirectToAction("Index", "Home");
 		}
 

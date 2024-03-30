@@ -46,8 +46,7 @@
 							</li>
 							<li>
 								<a class="droplist d-flex align-items-center gap-2" asp-controller="Post" asp-action="Edit">
-									<i class="material-symbols-outlined mat-icon"> hide_source </i>
-									<button asp-controller="Post" asp-action="Edit">Edit Post</button>
+									<i class="material-symbols-outlined mat-icon"> hide_source </i> <a href="@($"Post/Edit/{item.Id}")">Edit Post</a>
 								</a>
 
 							</li>

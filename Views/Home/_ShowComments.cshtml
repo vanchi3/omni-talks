@@ -1,5 +1,4 @@
 ﻿@model List<CommentViewModel>
-
 @foreach (var item in Model)
 {
 	<div class="comments-area mt-5">
@@ -40,10 +39,12 @@
 								</li>
 								<li>
 									@{
-										CommentViewModel editCommentVM = new CommentViewModel();
-										commentVM.Id = item.Id;
+										var id = item.Id;
 									}
-									<partial name="_EditCommentForm" model="editCommentVM">
+									<a href ="@($"Comment/Edit/{item.Id}")" class="droplist d-flex align-items-center gap-2">
+										Edit 
+									</a>
+
 								</li>
 							</ul>
 						</div>

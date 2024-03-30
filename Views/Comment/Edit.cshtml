@@ -1,0 +1,43 @@
+﻿@model CommentViewModel
+<div class="post-item d-flex flex-column gap-5 gap-md-7" id="news-feed">
+	<form asp-action="Edit" asp-controller="Comment" method="post">
+		<div class="d-flex mt-5 gap-3">
+			<div class="profile-box d-none d-xxl-block">
+				<a href="#"><img src="/images/avatar-11.png" class="max-un" alt="icon"></a>
+			</div>
+			<div class="form-content input-area py-1 d-flex gap-2 align-items-center w-100">
+				<input asp-for="Text" placeholder=@Model.Text />
+				<div class="file-input d-flex gap-1 gap-md-2">
+					<div class="file-upload">
+						<label class="file">
+							@* <input type="file"> *@
+							<span class="file-custom border-0 d-grid text-center">
+								<span class="material-symbols-outlined mat-icon m-0 xxltxt"> gif_box </span>
+							</span>
+						</label>
+					</div>
+					<div class="file-upload">
+						<label class="file">
+							@* <input type="file"> *@
+							<span class="file-custom border-0 d-grid text-center">
+								<span class="material-symbols-outlined mat-icon m-0 xxltxt"> perm_media </span>
+							</span>
+						</label>
+					</div>
+					<span class="mood-area">
+						<span class="material-symbols-outlined mat-icon m-0 xxltxt"> mood </span>
+					</span>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<script src="~/js/plugins/jquery.min.js"></script>
+<script src="~/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/plugins/slick.js"></script>
+<script src="~/js/plugins/jquery.nice-select.min.js"></script>
+<script src="~/js/plugins/plyr.js"></script>
+<script src="~/js/plugins/apexcharts.js"></script>
+<script src="~/js/plugins/wow.min.js"></script>
+<script src="~/js/plugins/plugin.js"></script>
+<script src="~/js/main.js"></script>

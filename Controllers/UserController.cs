@@ -13,14 +13,14 @@ namespace OmniTalks.Controllers
     {
         private readonly UserManager<User> _userManger;
         private readonly SignInManager<User> _signInManager;
-        private readonly RoleManager<User> _roleManager;
+        private readonly RoleManager<IdentityRole<Guid>> _roleManager;
         private readonly ApplicationDbContext _context;
 
         public UserController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             ApplicationDbContext context,
-            RoleManager<User> roleManager)
+            RoleManager<IdentityRole<Guid>> roleManager)
         {
             _userManger = userManager;
             _signInManager = signInManager;
@@ -104,11 +104,13 @@ namespace OmniTalks.Controllers
             ModelState.AddModelError("", "Invalid login");
             return View(model);
         }
+
+        [HttpGet]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "User");
         }
     }
 }

@@ -22,9 +22,9 @@ namespace OmniTalks.Controllers
         [Authorize]
         public IActionResult Add()
         {
-            PostViewModel model = new PostViewModel();         
-			return RedirectToAction("Index", "Home");
-		}
+            PostViewModel model = new PostViewModel();
+            return RedirectToAction("Index", "Home");
+        }
 
         [HttpPost]
         [Authorize]
@@ -32,32 +32,43 @@ namespace OmniTalks.Controllers
         {
             string currtentId = CurrentUserId;
             await this._postService.Add(model, currtentId);
-			return RedirectToAction("Index", "Home");
-		}
+            return RedirectToAction("Index", "Home");
+        }
 
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Remove(Guid id)
         {
-            await this._postService.Remove(id);
-			return RedirectToAction("Index", "Home");
-		}
+            var userId = new Guid(CurrentUserId);
+            await this._postService.Remove(id, userId);
+            return RedirectToAction("Index", "Home");
+        }
 
-		[HttpGet]
-		[Authorize]
-		public IActionResult Edit()
-		{
-			PostViewModel model = new PostViewModel();
-			return View(model);
-		}
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var userId = new Guid(CurrentUserId);
+            Post post = await this._postService.GetById(id);
+            if(post.UserId == userId)
+            {
+				PostViewModel model = await this._postService.Rewrite(id);
+				return View(model);
+			}
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
 
-		[HttpPost]
-		[Authorize]
-		public async Task<IActionResult> Edit(PostViewModel model,Guid id)
-		{
-			string currtentId = CurrentUserId;
-			await this._postService.Edit(model,id);
-			return RedirectToAction("Index", "Home");
-		}
-	}
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(PostViewModel model, Guid id)
+        {
+            Guid userId = new Guid(CurrentUserId);
+            await this._postService.Edit(model, id);
+
+            return RedirectToAction("Index", "Home");
+        }
+    }
 }

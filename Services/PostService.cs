@@ -8,35 +8,35 @@ using System.Security.Claims;
 
 namespace OmniTalks.Services
 {
-	public class PostService : IPostService
-	{
-		private readonly ApplicationDbContext _context;
+    public class PostService : IPostService
+    {
+        private readonly ApplicationDbContext _context;
 
-		public PostService(ApplicationDbContext context)
-		{
-			_context = context;
-		}
+        public PostService(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
-		public async Task Add(PostViewModel model, string currentId)
-		{
-			Post post = new Post()
-			{
-				Id = Guid.NewGuid(),
-				Content = model.Content,
-				UserId = Guid.Parse(currentId)
-			};
+        public async Task Add(PostViewModel model, string currentId)
+        {
+            Post post = new Post()
+            {
+                Id = Guid.NewGuid(),
+                Content = model.Content,
+                UserId = Guid.Parse(currentId)
+            };
 
-			await _context.Posts.AddAsync(post);
-			await _context.SaveChangesAsync();
-		}
+            await _context.Posts.AddAsync(post);
+            await _context.SaveChangesAsync();
+        }
 
-		public async Task<List<PostViewModel>> All()
-		{
-			List<PostViewModel> postViewModels = await _context.Posts
-				.Include(p => p.PostLikes)
-				.Include(p => p.User)
-				.Include(p => p.Comments)
-				.ThenInclude(c => c.User)
+        public async Task<List<PostViewModel>> All()
+        {
+            List<PostViewModel> postViewModels = await _context.Posts
+                .Include(p => p.PostLikes)
+                .Include(p => p.User)
+                .Include(p => p.Comments)
+                .ThenInclude(c => c.User)
                 .Select(p => new PostViewModel()
                 {
                     Id = p.Id,
@@ -53,24 +53,42 @@ namespace OmniTalks.Services
                 })
                 .ToListAsync();
 
-			return postViewModels;
-		}
+            return postViewModels;
+        }
 
-		public async Task Edit(PostViewModel model, Guid id)
+        public async Task<Post> GetById(Guid id)
+        {
+            Post post = await this._context.Posts.FindAsync(id);
+            return post;
+        }
+
+        public async Task Edit(PostViewModel model, Guid id)
+        {
+            Post post = await this._context.Posts.FindAsync(id);
+            post.Content = model.Content;
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task Remove(Guid id, Guid userId)
+        {
+            var post = await _context.Posts
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (post.UserId == userId)
+            {
+                _context.Posts.Remove(post);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+		public async Task<PostViewModel> Rewrite(Guid id)
 		{
-			Post post = await this._context.Posts.FindAsync(id);
-			post.Content = model.Content;
+			var post = await _context.Posts.FindAsync(id);
+			PostViewModel model = new PostViewModel();
+			model.Content = post.Content;
 
-			await _context.SaveChangesAsync();
-		}
-
-		public async Task Remove(Guid id) 
-		{
-			var post = await _context.Posts
-				.FirstOrDefaultAsync(x => x.Id == id);
-			
-			_context.Posts.Remove(post);
-			await _context.SaveChangesAsync();
+			return model;
 		}
 	}
 }
