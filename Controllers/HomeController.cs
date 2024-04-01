@@ -18,6 +18,7 @@ namespace OmniTalks.Controllers
         public async Task<IActionResult> Index()
         {
             ViewBag.Username = UserName;
+            ViewBag.CurrentUserId = new Guid(CurrentUserId);
             List<PostViewModel> models = await this._postService.All();
             return View(models);
         }

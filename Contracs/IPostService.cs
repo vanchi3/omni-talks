@@ -8,9 +8,9 @@ namespace OmniTalks.Contracs
         public Task Add(PostViewModel model,string currentId);
         public Task<List<PostViewModel>> All();
         public Task Remove(Guid id,Guid userId);
-        public Task Edit(PostViewModel model, Guid id);
-        public Task<PostViewModel> Rewrite(Guid id);
-        public Task<Post> GetById(Guid id);
+        public Task Edit(PostViewModel model);
+        //public Task<PostViewModel> Rewrite(Guid id);
+        public Task<PostViewModel> GetById(Guid id);
 
 	}
 }

@@ -56,15 +56,19 @@ namespace OmniTalks.Services
             return postViewModels;
         }
 
-        public async Task<Post> GetById(Guid id)
+        public async Task<PostViewModel> GetById(Guid id)
         {
             Post post = await this._context.Posts.FindAsync(id);
-            return post;
+            PostViewModel pvm = new PostViewModel();
+            pvm.Id = id;
+            pvm.Content = post.Content;
+            pvm.UserId = post.UserId;
+            return pvm;
         }
 
-        public async Task Edit(PostViewModel model, Guid id)
+        public async Task Edit(PostViewModel model)
         {
-            Post post = await this._context.Posts.FindAsync(id);
+            Post post = await this._context.Posts.FindAsync(model.Id);
             post.Content = model.Content;
 
             await _context.SaveChangesAsync();
@@ -82,14 +86,14 @@ namespace OmniTalks.Services
             }
         }
 
-		public async Task<PostViewModel> Rewrite(Guid id)
-		{
-			var post = await _context.Posts.FindAsync(id);
-			PostViewModel model = new PostViewModel();
-			model.Content = post.Content;
-
-			return model;
-		}
+		//public async Task<PostViewModel> Rewrite(Guid id)
+		//{
+		//	var post = await _context.Posts.FindAsync(id);
+		//	PostViewModel model = new PostViewModel();
+		//	model.Content = post.Content;
+        //
+		//	return model;
+		//}
 	}
 }
 

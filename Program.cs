@@ -30,12 +30,15 @@ namespace OmniTalks
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
 
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/User/Login";
+            });
 
             builder.Services.AddScoped<IPostService, PostService>();
             builder.Services.AddScoped<ILikeService, LikePostService>();
             builder.Services.AddScoped<ICommentService, CommentService>();
             var app = builder.Build();
-
 
 
             // Configure the HTTP request pipeline.
@@ -57,6 +60,7 @@ namespace OmniTalks
 
             app.UseAuthorization();
 
+
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
@@ -64,5 +68,6 @@ namespace OmniTalks
 
             app.Run();
         }
+    
     }
 }

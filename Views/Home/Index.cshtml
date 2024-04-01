@@ -49,7 +49,7 @@
                         <div class="main-area p-5 messages-content">
                             <h5 class="mb-8">Messages</h5>
                             <div class="single-box p-0 mb-7">
-                                <a href="profile-chat.html" class="d-flex gap-2 align-items-center">
+                                <a asp-action="Messages" asp-controller="Message" class="d-flex gap-2 align-items-center">
                                     <div class="avatar">
                                         <img class="avatar-img max-un" src="/images/avatar-7.png" alt="avatar">
                                     </div>
@@ -57,7 +57,7 @@
                                         <div class="title-area position-relative d-inline-flex align-items-center">
                                             <h6 class="m-0 d-inline-flex">Piter Maio</h6>
                                             <span class="abs-area position-absolute d-center mdtxt">3</span>
-                                        </div>
+                                        </div>                        
                                         <p class="mdtxt sms">Amet minim mollit non....</p>
                                     </div>
                                 </a>
@@ -543,27 +543,9 @@
                             </a>
                         </li>
                         <li>
-                            <a href="event.html" class="d-flex gap-4">
-                                <i class="material-symbols-outlined mat-icon"> workspace_premium </i>
-                                <span>Event</span>
-                            </a>
-                        </li>
-                        <li>
                             <a href="pages.html" class="d-flex gap-4">
                                 <i class="material-symbols-outlined mat-icon"> perm_media </i>
                                 <span>Pages</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="group.html" class="d-flex gap-4">
-                                <i class="material-symbols-outlined mat-icon"> workspaces </i>
-                                <span>Group</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="marketplace.html" class="d-flex gap-4">
-                                <i class="material-symbols-outlined mat-icon"> store </i>
-                                <span>Marketplace</span>
                             </a>
                         </li>
                         <li>
@@ -585,35 +567,6 @@
                             </a>
                         </li>
                     </ul>
-                    <div class="your-shortcuts">
-                        <h6>Your shortcuts</h6>
-                        <ul>
-                            <li>
-                                <a href="public-profile-post.html" class="d-flex align-items-center gap-3">
-                                    <img src="/images/shortcuts-1.png" alt="icon">
-                                    <span>Game Community</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="public-profile-post.html" class="d-flex align-items-center gap-3">
-                                    <img src="/images/shortcuts-2.png" alt="icon">
-                                    <span>Pixel Think (Member)</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="public-profile-post.html" class="d-flex align-items-center gap-3">
-                                    <img src="/images/shortcuts-3.png" alt="icon">
-                                    <span>8 Ball Pool</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="public-profile-post.html" class="d-flex align-items-center gap-3">
-                                    <img src="/images/shortcuts-4.png" alt="icon">
-                                    <span>Gembio</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </div>
             <div class="col-xxl-6 col-xl-5 col-lg-8 mt-0 mt-lg-10 mt-xl-0 d-flex flex-column gap-7 cus-z">

@@ -49,10 +49,9 @@ namespace OmniTalks.Controllers
         public async Task<IActionResult> Edit(Guid id)
         {
             var userId = new Guid(CurrentUserId);
-            Post post = await this._postService.GetById(id);
-            if(post.UserId == userId)
+            PostViewModel model = await this._postService.GetById(id);
+            if (model.UserId == userId)
             {
-				PostViewModel model = await this._postService.Rewrite(id);
 				return View(model);
 			}
             else
@@ -63,10 +62,10 @@ namespace OmniTalks.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Edit(PostViewModel model, Guid id)
+        public async Task<IActionResult> Edit(PostViewModel model)
         {
             Guid userId = new Guid(CurrentUserId);
-            await this._postService.Edit(model, id);
+            await this._postService.Edit(model);
 
             return RedirectToAction("Index", "Home");
         }

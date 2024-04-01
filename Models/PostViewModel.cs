@@ -12,6 +12,7 @@ namespace OmniTalks.Models
         public string ImgUrl { get; set; }
         
         public string UserName { get; set; }
+        public Guid UserId { get; set; }
         
         public int LikesCount { get; set; }
         

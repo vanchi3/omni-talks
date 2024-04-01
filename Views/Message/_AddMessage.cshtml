@@ -1,0 +1,40 @@
+﻿<div class="m-4 text-end chat-footer">
+    <form action="#" class="py-2 pt-1 px-5" asp-controller="Message" asp-action="Add">
+        <div class="d-flex align-items-sm-center align-items-end flex-column flex-sm-row mt-2 gap-3">
+            <div class="form-content p-0 d-flex gap-2 align-items-center w-100">
+                <div class="file-input d-flex gap-1 gap-md-2">
+                    <div class="file-upload">
+                        <label class="file">
+                            <input type="file">
+                            <span class="file-custom border-0 d-grid text-center">
+                                <span class="material-symbols-outlined rotateInDownLeft mat-icon fs-xxl"> attachment </span>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="file-upload">
+                        <label class="file">
+                            <input type="file">
+                            <span class="file-custom border-0 d-grid text-center">
+                                <span class="material-symbols-outlined mat-icon fs-xxl"> perm_media </span>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="file-upload">
+                        <label class="file">
+                            <input type="file">
+                            <span class="file-custom border-0 d-grid text-center">
+                                <span class="material-symbols-outlined mat-icon fs-xxl"> gif_box </span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <input class="py-2" placeholder="Type your message here..">
+            </div>
+            <div class="btn-area">
+                <button class="cmn-btn px-2 px-sm-5 px-lg-6">
+                    Send
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
