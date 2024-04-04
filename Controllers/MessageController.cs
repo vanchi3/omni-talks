@@ -38,7 +38,8 @@ namespace OmniTalks.Controllers
 
 			ChatViewModel model = new ChatViewModel()
 			{
-				Reciever = user
+				Reciever = user,
+				Messages = await _chatService.ShowMessages(currentUser)
 			};
 
 			return View(model);
@@ -62,12 +63,12 @@ namespace OmniTalks.Controllers
 
 			return Redirect($"/Message/ShowChat/{model.User2Id}");
 		}
-		[HttpGet]
-		public async Task<IActionResult> _ShowMessages()
-		{
-			Guid currentId = new Guid(CurrentUserId);
-			List<ShowMessageViewModel> models = await _chatService.ShowMessages(currentId);
-			return View(models);
-		}
+		//[HttpGet]
+		//public async Task<IActionResult> _ShowMessages()
+		//{
+		//	Guid currentId = new Guid(CurrentUserId);
+		//	List<ShowMessageViewModel> models = await _chatService.ShowMessages(currentId);
+		//	return View(models);
+		//}
 	}
 }
