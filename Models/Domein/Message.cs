@@ -9,14 +9,16 @@ namespace OmniTalks.Models.Domein
         public Guid Id { get; set; }
 
         [Required]
-        public Guid RecieverUserId { get; set; }
-        public User RecieverUser { get; set; } = null!;
-
-        [Required]
-        public Guid SenderUserId { get; set; }
-        public User SenderUser { get; set; } = null!;
-
-        [Required]
         public string Text { get; set; } = null!;
+        
+        [Required]
+        public DateTime SentTime { get; set; }
+
+        [ForeignKey(nameof(Chat))]
+        public Guid ChatId { get; set; }
+        public Chat Chat { get; set; } = null!;
+
+        [Required]
+        public bool IsFromUser1 { get; set; }
     }
 }

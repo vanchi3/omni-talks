@@ -19,6 +19,7 @@ namespace OmniTalks.Data
 		public DbSet<PostLike> PostsLikes { get; set; }
 		public DbSet<Comment> Comments { get; set; }
 		public DbSet<CommentLike> CommentsLikes { get; set; }
+		public DbSet<Chat> Chats { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
@@ -36,15 +37,15 @@ namespace OmniTalks.Data
 				.OnDelete(DeleteBehavior.NoAction);
 
 			builder.Entity<User>()
-				.HasMany(u => u.SentMessages)
-				.WithOne(s => s.SenderUser)
-				.HasForeignKey(s => s.SenderUserId)
+				.HasMany(u => u.SentedChat)
+				.WithOne(s => s.User1)
+				.HasForeignKey(s => s.User1Id)
 				.OnDelete(DeleteBehavior.NoAction);
 			
 			builder.Entity<User>()
-				.HasMany(u => u.RecievedMessages)
-				.WithOne(r => r.RecieverUser)
-				.HasForeignKey(r => r.RecieverUserId)
+				.HasMany(u => u.RecievedChat)
+				.WithOne(r => r.User2)
+				.HasForeignKey(r => r.User2Id)
 				.OnDelete(DeleteBehavior.NoAction);
 
 			builder.Entity<User>()

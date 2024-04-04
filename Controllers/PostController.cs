@@ -31,7 +31,11 @@ namespace OmniTalks.Controllers
         public async Task<IActionResult> Add(PostViewModel model)
         {
             string currtentId = CurrentUserId;
-            await this._postService.Add(model, currtentId);
+			if (!ModelState.IsValid)
+			{
+				return RedirectToAction("Index", "Home");
+			}
+			await this._postService.Add(model, currtentId);
             return RedirectToAction("Index", "Home");
         }
 

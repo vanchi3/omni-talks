@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OmniTalks.Data;
 
@@ -11,9 +12,11 @@ using OmniTalks.Data;
 namespace OmniTalks.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240401192035_ChatTable")]
+    partial class ChatTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -163,19 +166,19 @@ namespace OmniTalks.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("User1Id")
+                    b.Property<Guid>("RecieverUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("User2Id")
+                    b.Property<Guid>("SenderUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("User1Id");
+                    b.HasIndex("RecieverUserId");
 
-                    b.HasIndex("User2Id");
+                    b.HasIndex("SenderUserId");
 
-                    b.ToTable("Chats");
+                    b.ToTable("Chat");
                 });
 
             modelBuilder.Entity("OmniTalks.Models.Domein.Comment", b =>
@@ -239,11 +242,8 @@ namespace OmniTalks.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ChatId")
+                    b.Property<Guid?>("ChatId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("IsFromUser1")
-                        .HasColumnType("bit");
 
                     b.Property<DateTime>("SentTime")
                         .HasColumnType("datetime2");
@@ -442,21 +442,21 @@ namespace OmniTalks.Migrations
 
             modelBuilder.Entity("OmniTalks.Models.Domein.Chat", b =>
                 {
-                    b.HasOne("OmniTalks.Models.Domein.User", "User1")
-                        .WithMany("SentedChat")
-                        .HasForeignKey("User1Id")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("OmniTalks.Models.Domein.User", "User2")
+                    b.HasOne("OmniTalks.Models.Domein.User", "RecieverUser")
                         .WithMany("RecievedChat")
-                        .HasForeignKey("User2Id")
+                        .HasForeignKey("RecieverUserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("User1");
+                    b.HasOne("OmniTalks.Models.Domein.User", "SenderUser")
+                        .WithMany("SentedChat")
+                        .HasForeignKey("SenderUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
-                    b.Navigation("User2");
+                    b.Navigation("RecieverUser");
+
+                    b.Navigation("SenderUser");
                 });
 
             modelBuilder.Entity("OmniTalks.Models.Domein.Comment", b =>
@@ -499,13 +499,9 @@ namespace OmniTalks.Migrations
 
             modelBuilder.Entity("OmniTalks.Models.Domein.Message", b =>
                 {
-                    b.HasOne("OmniTalks.Models.Domein.Chat", "Chat")
-                        .WithMany("Messages")
-                        .HasForeignKey("ChatId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Chat");
+                    b.HasOne("OmniTalks.Models.Domein.Chat", null)
+                        .WithMany("Text")
+                        .HasForeignKey("ChatId");
                 });
 
             modelBuilder.Entity("OmniTalks.Models.Domein.Post", b =>
@@ -559,7 +555,7 @@ namespace OmniTalks.Migrations
 
             modelBuilder.Entity("OmniTalks.Models.Domein.Chat", b =>
                 {
-                    b.Navigation("Messages");
+                    b.Navigation("Text");
                 });
 
             modelBuilder.Entity("OmniTalks.Models.Domein.Comment", b =>

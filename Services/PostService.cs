@@ -42,6 +42,7 @@ namespace OmniTalks.Services
                     Id = p.Id,
                     Content = p.Content,
                     UserName = p.User.UserName,
+                    UserId = p.User.Id,
                     Comments = p.Comments.Select(c => new CommentViewModel()
                     {
                         Id = c.Id,

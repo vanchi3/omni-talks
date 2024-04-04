@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OmniTalks.Data;
 
@@ -11,9 +12,11 @@ using OmniTalks.Data;
 namespace OmniTalks.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240404070623_RemoveUniquesOnChat")]
+    partial class RemoveUniquesOnChat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -241,9 +244,6 @@ namespace OmniTalks.Migrations
 
                     b.Property<Guid>("ChatId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("IsFromUser1")
-                        .HasColumnType("bit");
 
                     b.Property<DateTime>("SentTime")
                         .HasColumnType("datetime2");

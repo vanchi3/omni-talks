@@ -38,6 +38,9 @@ namespace OmniTalks
             builder.Services.AddScoped<IPostService, PostService>();
             builder.Services.AddScoped<ILikeService, LikePostService>();
             builder.Services.AddScoped<ICommentService, CommentService>();
+            builder.Services.AddScoped<IMessageService, MessageService>();
+            builder.Services.AddScoped<IChatService, ChatService>();
+            builder.Services.AddScoped<IUserService, UserService>();
             var app = builder.Build();
 
 

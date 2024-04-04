@@ -14,9 +14,9 @@ namespace OmniTalks.Models.Domein
 
         public List<Comment> Comments { get; set; } = [];
 
-        public List<Message> SentMessages { get; set; } = [];
+        public List<Chat> SentedChat { get; set; } = [];
 
-        public List<Message> RecievedMessages { get; set; } = [];
+        public List<Chat> RecievedChat { get; set; } = [];
 
         public List<Post> Posts { get; set; } = [];
 

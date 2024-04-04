@@ -112,5 +112,14 @@ namespace OmniTalks.Controllers
 
             return RedirectToAction("Login", "User");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> OtherProfile(Guid id)
+        {
+            UserViewModel model = new UserViewModel();
+            model.Id = id;
+            return View(model);
+        }
+
     }
 }
