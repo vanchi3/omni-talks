@@ -1,20 +1,11 @@
-﻿ <!-- start preloader -->
-<div class="preloader align-items-center justify-content-center">
-    <span class="loader"></span>
-</div>
-<!-- end preloader -->
-<!-- Scroll To Top Start-->
-<button class="scrollToTop d-none d-lg-block"><i class="mat-icon fas fa-angle-double-up"></i></button>
-<!-- Scroll To Top End -->
-<!-- header-section start -->
-<header class="header-section header-menu">
+﻿<header class="header-section header-menu">
+    
     <nav class="navbar navbar-expand-lg p-0">
         <div class="container">
             <nav class="navbar w-100 navbar-expand-lg justify-content-betweenm">
                 <a href="index.html" class="navbar-brand">
-                    <img src="assets/images/logo.png" class="logo" alt="logo">
+                    <img src="C:\Users\Ivana\Desktop\Dimplomen Proekt\logo_6.png" class="logo" alt="logo" width="100" height="100">
                 </a>
-
                 <button class="button search-active d-block d-md-none">
                     <i class="d-center material-symbols-outlined fs-xxl mat-icon"> search </i>
                 </button>
@@ -47,90 +38,29 @@
                             </div>
                         </div>
                         <div class="main-area p-5 messages-content">
+                            @{
+                                var chatMessages = ViewData["HeaderChatsMessages"] as List<HeaderChatViewModel>;
+
+							}
                             <h5 class="mb-8">Messages</h5>
-                            <div class="single-box p-0 mb-7">
-                                <a href="profile-chat.html" class="d-flex gap-2 align-items-center">
-                                    <div class="avatar">
-                                        <img class="avatar-img max-un" src="assets/images/avatar-7.png" alt="avatar">
-                                    </div>
-                                    <div class="text-area">
-                                        <div class="title-area position-relative d-inline-flex align-items-center">
-                                            <h6 class="m-0 d-inline-flex">Piter Maio</h6>
-                                            <span class="abs-area position-absolute d-center mdtxt">3</span>
+                            @foreach (var item in chatMessages)
+                            {
+                                
+                                <div class="single-box p-0 mb-7">
+                                    <a href="@($"Chat/ShowChat/{item.Id}")" class="d-flex gap-2 align-items-center">
+                                        <div class="avatar">
+                                            <img class="avatar-img max-un" src="/images/avatar-7.png" alt="avatar">
                                         </div>
-                                        <p class="mdtxt sms">Amet minim mollit non....</p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="single-box p-0 mb-7">
-                                <a href="profile-chat.html" class="d-flex gap-2 align-items-center">
-                                    <div class="avatar">
-                                        <img class="avatar-img max-un" src="assets/images/avatar-1.png" alt="avatar">
-                                    </div>
-                                    <div class="text-area">
-                                        <h6 class="m-0 mb-1">Annette Black</h6>
-                                        <p class="mdtxt">You: consequat sunt</p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="single-box p-0 mb-7">
-                                <a href="profile-chat.html" class="d-flex gap-2 align-items-center">
-                                    <div class="avatar">
-                                        <img class="avatar-img max-un" src="assets/images/avatar-2.png" alt="avatar">
-                                    </div>
-                                    <div class="text-area">
-                                        <h6 class="m-0 mb-1">Ralph Edwards</h6>
-                                        <p class="mdtxt sms">Amet minim mollit non....</p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="single-box p-0 mb-7">
-                                <a href="profile-chat.html" class="d-flex gap-2 align-items-center">
-                                    <div class="avatar">
-                                        <img class="avatar-img max-un" src="assets/images/avatar-3.png" alt="avatar">
-                                    </div>
-                                    <div class="text-area">
-                                        <h6 class="m-0 mb-1">Darrell Steward</h6>
-                                        <p class="mdtxt">You: consequat sunt</p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="single-box p-0 mb-7">
-                                <a href="profile-chat.html" class="d-flex gap-2 align-items-center">
-                                    <div class="avatar">
-                                        <img class="avatar-img max-un" src="assets/images/avatar-4.png" alt="avatar">
-                                    </div>
-                                    <div class="text-area">
-                                        <h6 class="m-0 mb-1">Wade Warren</h6>
-                                        <p class="mdtxt">You: consequat sunt</p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="single-box p-0 mb-7">
-                                <a href="profile-chat.html" class="d-flex gap-2 align-items-center">
-                                    <div class="avatar">
-                                        <img class="avatar-img max-un" src="assets/images/avatar-5.png" alt="avatar">
-                                    </div>
-                                    <div class="text-area">
-                                        <h6 class="m-0 mb-1">Kathryn Murphy</h6>
-                                        <p class="mdtxt">You: consequat sunt</p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="single-box p-0 mb-7">
-                                <a href="profile-chat.html" class="d-flex gap-2 align-items-center">
-                                    <div class="avatar">
-                                        <img class="avatar-img max-un" src="assets/images/avatar-6.png" alt="avatar">
-                                    </div>
-                                    <div class="text-area">
-                                        <h6 class="m-0 mb-1">Jacob Jones</h6>
-                                        <p class="mdtxt">You: consequat sunt</p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="btn-area">
-                                <a href="profile-chat.html">See all inbox</a>
-                            </div>
+                                        <div class="text-area">
+                                            <div class="title-area position-relative d-inline-flex align-items-center">
+                                                <h6 class="m-0 d-inline-flex">@item.Name</h6>
+                                                <span class="abs-area position-absolute d-center mdtxt">3</span>
+                                            </div>
+                                            <p class=" mdtxt sms">@item.LastText</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            }   
                         </div>
                     </div>
                     <div class="single-item d-none d-lg-block messages-area notification-area">
@@ -146,8 +76,8 @@
                                 <a href="profile-notification.html" class="d-flex justify-content-between align-items-center">
                                     <div class="left-item position-relative d-inline-flex gap-3">
                                         <div class="avatar position-relative d-inline-flex">
-                                            <img class="avatar-img max-un" src="assets/images/avatar-1.png" alt="avatar">
-                                            <img class="abs-item position-absolute max-un" src="assets/images/icon/speech-bubble.png" alt="icon">
+                                            <img class="avatar-img max-un" src="/images/avatar-1.png" alt="avatar">
+                                            <img class="abs-item position-absolute max-un" src="/images/icon/speech-bubble.png" alt="icon">
                                         </div>
                                         <div class="text-area">
                                             <h6 class="m-0 mb-1">Piter Maio</h6>
@@ -163,8 +93,8 @@
                                 <a href="profile-notification.html" class="d-flex justify-content-between align-items-center">
                                     <div class="left-item position-relative d-inline-flex gap-3">
                                         <div class="avatar position-relative d-inline-flex">
-                                            <img class="avatar-img max-un" src="assets/images/avatar-2.png" alt="avatar">
-                                            <img class="abs-item position-absolute max-un" src="assets/images/icon/emoji-love.png" alt="icon">
+                                            <img class="avatar-img max-un" src="/images/avatar-2.png" alt="avatar">
+                                            <img class="abs-item position-absolute max-un" src="/images/icon/emoji-love.png" alt="icon">
                                         </div>
                                         <div class="text-area">
                                             <h6 class="m-0 mb-1">Kathryn Murphy</h6>
@@ -180,8 +110,8 @@
                                 <a href="profile-notification.html" class="d-flex justify-content-between align-items-center">
                                     <div class="left-item position-relative d-inline-flex gap-3">
                                         <div class="avatar position-relative d-inline-flex">
-                                            <img class="avatar-img max-un" src="assets/images/avatar-3.png" alt="avatar">
-                                            <img class="abs-item position-absolute max-un" src="assets/images/icon/emoji-love.png" alt="icon">
+                                            <img class="avatar-img max-un" src="/images/avatar-3.png" alt="avatar">
+                                            <img class="abs-item position-absolute max-un" src="/images/icon/emoji-love.png" alt="icon">
                                         </div>
                                         <div class="text-area">
                                             <h6 class="m-0 mb-1">Jacob Jones</h6>
@@ -201,8 +131,8 @@
                                 <a href="profile-notification.html" class="d-flex justify-content-between align-items-center">
                                     <div class="left-item position-relative d-inline-flex gap-3">
                                         <div class="avatar position-relative d-inline-flex">
-                                            <img class="avatar-img max-un" src="assets/images/avatar-4.png" alt="avatar">
-                                            <img class="abs-item position-absolute max-un" src="assets/images/icon/emoji-love.png" alt="icon">
+                                            <img class="avatar-img max-un" src="/images/avatar-4.png" alt="avatar">
+                                            <img class="abs-item position-absolute max-un" src="/images/icon/emoji-love.png" alt="icon">
                                         </div>
                                         <div class="text-area">
                                             <h6 class="m-0 mb-1">Kathryn Murphy</h6>
@@ -222,14 +152,14 @@
                     <div class="single-item d-none d-lg-block profile-area position-relative">
                         <div class="profile-pic d-flex align-items-center">
                             <span class="avatar cmn-head active-status">
-                                <img class="avatar-img max-un" src="assets/images/avatar-1.png" alt="avatar">
+                                <img class="avatar-img max-un" src="/images/avatar-1.png" alt="avatar">
                             </span>
                         </div>
                         <div class="main-area p-5 profile-content">
                             <div class="head-area">
                                 <div class="d-flex gap-3 align-items-center">
                                     <div class="avatar-item">
-                                        <img class="avatar-img max-un" src="assets/images/avatar-1.png" alt="avatar">
+                                        <img class="avatar-img max-un" src="/images/avatar-1.png" alt="avatar">
                                     </div>
                                     <div class="text-area">
                                         <h6 class="m-0 mb-1">Lori Ferguson</h6>
@@ -248,7 +178,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="mdtxt">
+                                    <a asp-controller="User" asp-action="Logout" class="mdtxt">
                                         <i class="material-symbols-outlined mat-icon"> power_settings_new </i>
                                         Sign Out
                                     </a>
@@ -270,8 +200,6 @@
         </div>
     </nav>
 </header>
-<!-- header-section end -->
-<!-- Bottom Menu start -->
 <div class="header-menu py-3 header-menu d-block d-lg-none position-fixed bottom-0 w-100 cus-z">
     <div class="right-area position-relative d-flex justify-content-around gap-3 gap-xxl-6 align-items-center">
         <div class="single-item messages-area">

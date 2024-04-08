@@ -4,13 +4,13 @@ using OmniTalks.Models;
 
 namespace OmniTalks.Controllers
 {
-	public class MessageController : BaseController
+	public class ChatController : BaseController
 	{
 		private IMessageService _messageService;
 		private IChatService _chatService;
 		private IUserService _userService;
 
-		public MessageController(IMessageService messageService, IChatService chatService, IUserService userService)
+		public ChatController(IMessageService messageService, IChatService chatService, IUserService userService)
 		{
 			_messageService = messageService;
 			_chatService = chatService;
@@ -50,7 +50,7 @@ namespace OmniTalks.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
-				return Redirect($"/Message/ShowChat/{model.User2Id}");
+				return Redirect($"/Chat/ShowChat/{model.User2Id}");
 			}
 
 			model.User1Id = new Guid(CurrentUserId);
@@ -61,7 +61,30 @@ namespace OmniTalks.Controllers
 				return BadRequest();
 			}
 
-			return Redirect($"/Message/ShowChat/{model.User2Id}");
+			return Redirect($"/Chat/ShowChat/{model.User2Id}");
+		}
+		[HttpPost]
+		public async Task<IActionResult> EditMessage(MessageViewModel model)
+		{
+			if (!ModelState.IsValid)
+			{
+				return Redirect($"/Chat/ShowChat/{model.User2Id}");
+			}
+
+			model.User1Id = new Guid(CurrentUserId);
+			var isAdded = await _chatService.EditMessage(model);
+
+			if (!isAdded)
+			{
+				return BadRequest();
+			}
+
+			return Redirect($"/Chat/ShowChat/{model.User2Id}");
+		}
+		[HttpGet]
+		public async Task<IActionResult> ShowAllChats()
+		{
+			return View();
 		}
 		//[HttpGet]
 		//public async Task<IActionResult> _ShowMessages()

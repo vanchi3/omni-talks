@@ -1,0 +1,74 @@
+﻿@model List<ShowMessageViewModel>
+<form asp-controller="Chat" asp-action="_ShowMessages">
+	@foreach (var message in Model)
+	{
+		<ul class="py-4 px-5 cus-scrollbar bottom-0 main-chat-box">
+			@{
+				if (message.IsCurrent)
+				{
+					<li class="me">
+						<div class="message">
+							<p>@message.Text</p>
+							<span class="mdtxt">@message.SentTime</span>
+							<div class="btn-group cus-dropdown dropend">
+								<button type="button" class="dropdown-btn show" data-bs-toggle="dropdown" aria-expanded="true">
+									<i class="material-symbols-outlined fs-xxl m-0"> more_horiz </i>
+								</button>
+								<ul class="dropdown-menu p-4 pt-2 show" data-popper-placement="right-start">
+									<li>
+										<a class="droplist d-flex align-items-center gap-2" href="#">
+											<i class="material-symbols-outlined mat-icon"> person_remove </i>
+											<span>Unfollow</span>
+										</a>
+									</li>
+									<li>
+										<a class="droplist d-flex align-items-center gap-2" href="#">
+											<i class="material-symbols-outlined mat-icon"> hide_source </i>
+											<span>Hide Contact</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="entete">
+							<img src="/images/avatar-1.png" alt="image">
+						</div>
+					</li>
+
+				}
+				else
+				{
+					<li class="you">
+						<div class="entete">
+							<img src="/images/avatar-2.png" alt="image">
+						</div>
+						<div class="message">
+							<p>@message.Text<p>
+								<span class="mdtxt">24</span>
+								<div class="btn-group cus-dropdown dropend">
+									<button type="button" class="dropdown-btn show" data-bs-toggle="dropdown" aria-expanded="true">
+										<i class="material-symbols-outlined fs-xxl m-0"> more_horiz </i>
+									</button>
+									<ul class="dropdown-menu p-4 pt-2 show" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(36px, 0px, 0px);" data-popper-placement="right-start">
+										<li>
+											<a class="droplist d-flex align-items-center gap-2" href="#">
+												<i class="material-symbols-outlined mat-icon"> person_remove </i>
+												<span>Unfollow</span>
+											</a>
+										</li>
+										<li>
+											<a class="droplist d-flex align-items-center gap-2" href="#">
+												<i class="material-symbols-outlined mat-icon"> hide_source </i>
+												<span>Hide Contact</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+
+						</div>
+					</li>
+				}
+			}
+		</ul>
+	}
+</form>

@@ -87,14 +87,14 @@ namespace OmniTalks.Services
             }
         }
 
-		//public async Task<PostViewModel> Rewrite(Guid id)
-		//{
-		//	var post = await _context.Posts.FindAsync(id);
-		//	PostViewModel model = new PostViewModel();
-		//	model.Content = post.Content;
+        //public async Task<PostViewModel> Rewrite(Guid id)
+        //{
+        //	var post = await _context.Posts.FindAsync(id);
+        //	PostViewModel model = new PostViewModel();
+        //	model.Content = post.Content;
         //
-		//	return model;
-		//}
-	}
+        //	return model;
+        //}
+    }
 }
 

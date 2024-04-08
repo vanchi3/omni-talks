@@ -20,5 +20,6 @@ namespace OmniTalks.Models.Domein
 
         [Required]
         public bool IsFromUser1 { get; set; }
+        public bool AlredyExist { get; internal set; }
     }
 }
