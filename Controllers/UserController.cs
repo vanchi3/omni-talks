@@ -39,6 +39,11 @@ namespace OmniTalks.Controllers
 
             var model = new RegisterViewModel();
 
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Register");
+            }
+
             return View(model);
         }
         [HttpPost]
@@ -117,6 +122,10 @@ namespace OmniTalks.Controllers
         public async Task<IActionResult> OtherProfile(Guid id)
         {
             UserViewModel model = new UserViewModel();
+            if (id == null)
+            {
+                return NotFound();
+            }
             model.Id = id;
             return View(model);
         }

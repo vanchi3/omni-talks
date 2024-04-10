@@ -17,8 +17,6 @@ namespace OmniTalks.Models
 
 		[Required]
 		public bool IsFromUser1 { get; set; }
-		public bool AlredyExists { get; set; }
-
-
-	}
+        public  bool AlredyExist { get; set; }
+    }
 }

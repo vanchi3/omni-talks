@@ -87,7 +87,6 @@ namespace OmniTalks.Services
             message.ChatId = chatId;
             message.SentTime = DateTime.Now;
             message.IsFromUser1 = true;
-            message.AlredyExist = true;
   
             await _context.SaveChangesAsync();
             return true;

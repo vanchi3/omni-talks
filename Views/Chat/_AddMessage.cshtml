@@ -1,6 +1,6 @@
 ﻿@model MessageViewModel
 <div class="m-4 text-end chat-footer">
-	<form class="py-2 pt-1 px-5" method="post" asp-controller="Chat" asp-action="AddMessage">
+	<form class="py-2 pt-1 px-5" method="post" asp-controller="Chat" asp-action="_AddMessage">
 		<input type="hidden" asp-for="@Model.User2Id" />
 		<div class="d-flex align-items-sm-center align-items-end flex-column flex-sm-row mt-2 gap-3">
 			<div class="form-content p-0 d-flex gap-2 align-items-center w-100">
@@ -30,9 +30,9 @@
 						</label>
 					</div>
 				</div>
-				@if (Model.AlredyExists)
+				@if(Model.AlredyExist == true)
 				{
-					<input asp-for="Text" class="py-2" placeholder=@Model.Text>
+					<input asp-for="Text" class="py-2" placeholder=model.Text>
 				}
 				else
 				{

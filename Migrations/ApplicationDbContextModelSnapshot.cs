@@ -175,7 +175,7 @@ namespace OmniTalks.Migrations
 
                     b.HasIndex("User2Id");
 
-                    b.ToTable("Chats");
+                    b.ToTable("Chats", (string)null);
                 });
 
             modelBuilder.Entity("OmniTalks.Models.Domein.Comment", b =>
@@ -200,7 +200,7 @@ namespace OmniTalks.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("OmniTalks.Models.Domein.CommentLike", b =>
@@ -215,7 +215,7 @@ namespace OmniTalks.Migrations
 
                     b.HasIndex("CommentId");
 
-                    b.ToTable("CommentsLikes");
+                    b.ToTable("CommentsLikes", (string)null);
                 });
 
             modelBuilder.Entity("OmniTalks.Models.Domein.Connection", b =>
@@ -230,7 +230,7 @@ namespace OmniTalks.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Connections");
+                    b.ToTable("Connections", (string)null);
                 });
 
             modelBuilder.Entity("OmniTalks.Models.Domein.Message", b =>
@@ -256,7 +256,7 @@ namespace OmniTalks.Migrations
 
                     b.HasIndex("ChatId");
 
-                    b.ToTable("Messages");
+                    b.ToTable("Messages", (string)null);
                 });
 
             modelBuilder.Entity("OmniTalks.Models.Domein.Post", b =>
@@ -276,7 +276,7 @@ namespace OmniTalks.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Posts");
+                    b.ToTable("Posts", (string)null);
                 });
 
             modelBuilder.Entity("OmniTalks.Models.Domein.PostLike", b =>
@@ -291,7 +291,7 @@ namespace OmniTalks.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.ToTable("PostsLikes");
+                    b.ToTable("PostsLikes", (string)null);
                 });
 
             modelBuilder.Entity("OmniTalks.Models.Domein.User", b =>
@@ -386,7 +386,7 @@ namespace OmniTalks.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserConnections");
+                    b.ToTable("UserConnections", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

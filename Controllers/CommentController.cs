@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OmniTalks.Contracs;
 using OmniTalks.Models;
+using OmniTalks.Models.Domein;
 using System.ComponentModel.DataAnnotations;
 
 namespace OmniTalks.Controllers
@@ -24,7 +25,11 @@ namespace OmniTalks.Controllers
 		public async Task<IActionResult> Add(AddCommentViewModel model)
 		{
 			string currentId = CurrentUserId;
-			await this._service.Add(model, currentId);
+            if (currentId == null)
+            {
+                return NotFound();
+            }
+            await this._service.Add(model, currentId);
 			return RedirectToAction("Index", "Home");
 		}
 		[HttpGet]
@@ -32,9 +37,18 @@ namespace OmniTalks.Controllers
 		{
 			Guid userId = new Guid(CurrentUserId);
 			Guid commenterId = await this._service.GetById(id);
-			if(commenterId == userId)
+            if (userId == null || commenterId == null)
+            {
+                return NotFound();
+            }
+            if (commenterId == userId)
 			{
 				CommentViewModel model = await this._service.Rewrite(id);
+
+				if (!ModelState.IsValid)
+				{
+					return RedirectToAction($"Index","Home");
+				}
 
 				return View(model);
 			}
@@ -61,15 +75,29 @@ namespace OmniTalks.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Remove(CommentViewModel model)
 		{
-			Guid userId = new Guid(CurrentUserId);
-			await this._service.Remove(model.Id,userId);
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index","Home");
+            }
+
+            Guid userId = new Guid(CurrentUserId);
+            if (userId == null)
+            {
+                return NotFound();
+            }
+            await this._service.Remove(model.Id,userId);
 			return RedirectToAction("Index", "Home");
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> AddLike(CommentLikeViewModel model)
 		{
-			string id = CurrentUserId;
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            string id = CurrentUserId;
 			await _service.AddLike(model, id);
 			return RedirectToAction("Index", "Home");
 		}

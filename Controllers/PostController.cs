@@ -31,10 +31,6 @@ namespace OmniTalks.Controllers
         public async Task<IActionResult> Add(PostViewModel model)
         {
             string currtentId = CurrentUserId;
-			if (!ModelState.IsValid)
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			await this._postService.Add(model, currtentId);
             return RedirectToAction("Index", "Home");
         }
@@ -54,7 +50,11 @@ namespace OmniTalks.Controllers
         {
             var userId = new Guid(CurrentUserId);
             PostViewModel model = await this._postService.GetById(id);
-            if (model.UserId == userId)
+			if (!ModelState.IsValid)
+			{
+				return RedirectToAction($"Index", "Home");
+			}
+			if (model.UserId == userId)
             {
 				return View(model);
 			}

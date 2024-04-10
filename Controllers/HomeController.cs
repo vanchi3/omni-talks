@@ -17,9 +17,14 @@ namespace OmniTalks.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            ViewBag.Username = UserName;
+            if (!User?.Identity?.IsAuthenticated ?? false)
+            {
+                return RedirectToAction("Login","User");
+            }
+                ViewBag.Username = UserName;
             ViewBag.CurrentUserId = new Guid(CurrentUserId);
             List<PostViewModel> models = await this._postService.All();
+
             return View(models);
         }
 

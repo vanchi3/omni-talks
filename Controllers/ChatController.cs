@@ -42,6 +42,11 @@ namespace OmniTalks.Controllers
 				Messages = await _chatService.ShowMessages(currentUser)
 			};
 
+			if (!ModelState.IsValid)
+			{
+				return Redirect($"/Chat/ShowChat/{model.Reciever.Id}");
+			}
+
 			return View(model);
 		}
 
@@ -63,24 +68,42 @@ namespace OmniTalks.Controllers
 
 			return Redirect($"/Chat/ShowChat/{model.User2Id}");
 		}
-		[HttpPost]
-		public async Task<IActionResult> EditMessage(MessageViewModel model)
-		{
-			if (!ModelState.IsValid)
-			{
-				return Redirect($"/Chat/ShowChat/{model.User2Id}");
-			}
 
-			model.User1Id = new Guid(CurrentUserId);
-			var isAdded = await _chatService.EditMessage(model);
-
-			if (!isAdded)
-			{
-				return BadRequest();
-			}
-
-			return Redirect($"/Chat/ShowChat/{model.User2Id}");
-		}
+		//[HttpGet]
+		//public IActionResult EditMessage(Guid id)
+		//{
+		//	MessageViewModel model = new MessageViewModel();
+		//	model.User2Id = id;
+		//	model.AlredyExist = true;
+		//	if (!ModelState.IsValid)
+		//	{
+		//		return Redirect($"/Chat/ShowChat/{model.User2Id}");
+		//	}
+		//
+		//	model.User1Id = new Guid(CurrentUserId);
+		//	model.AlredyExist = true;
+		//
+		//	return Redirect($"/Chat/ShowChat/{model.User2Id}");
+		//}
+		//[HttpPost]
+		//public async Task<IActionResult> EditMessage(MessageViewModel model)
+		//{
+		//	if (!ModelState.IsValid)
+		//	{
+		//		return Redirect($"/Chat/ShowChat/{model.User2Id}");
+		//	}
+		//
+		//	model.User1Id = new Guid(CurrentUserId);
+		//	model.AlredyExist = true;
+		//	var isAdded = await _chatService.EditMessage(model);
+		//
+		//	if (!isAdded)
+		//	{
+		//		return BadRequest();
+		//	}
+		//
+		//	return Redirect($"/Chat/ShowChat/{model.User2Id}");
+		//}
 		[HttpGet]
 		public async Task<IActionResult> ShowAllChats()
 		{
