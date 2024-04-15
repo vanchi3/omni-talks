@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OmniTalks.Contracs;
 using OmniTalks.Data;
-using OmniTalks.Models;
 using OmniTalks.Models.Domein;
+using OmniTalks.Models.PostViewModel;
 
 namespace OmniTalks.Services
 {
@@ -17,7 +17,7 @@ namespace OmniTalks.Services
 		public async Task Add(PostLikeViewModel model, string userId)
 		{
 
-			bool conatins = await _context.PostsLikes.AnyAsync(x => x.UserId.ToString() == userId  &&  x.PostId == model.PostId);
+			bool conatins = await _context.PostsLikes.AnyAsync(x => x.UserId.ToString() == userId && x.PostId == model.PostId);
 			if (!conatins)
 			{
 				PostLike like = new PostLike()
@@ -29,7 +29,7 @@ namespace OmniTalks.Services
 			}
 			else
 			{
-				Remove(model,userId);
+				Remove(model, userId);
 			}
 			_context.SaveChanges();
 		}

@@ -1,5 +1,5 @@
-﻿using OmniTalks.Models;
-using OmniTalks.Models.Domein;
+﻿
+using OmniTalks.Models.CommentViewModels;
 
 namespace OmniTalks.Contracs
 {

@@ -1,37 +1,36 @@
-﻿@model CommentViewModel
-<div class="post-item d-flex flex-column gap-5 gap-md-7" id="news-feed">
-	<form asp-action="Edit" asp-controller="Comment" method="post">
+﻿@using OmniTalks.Models.CommentViewModels
+@model CommentViewModel
+<div class="post-item d-flex flex-column gap-5 gap-md-7 container-no-bottom-margin" id="news-feed">
+	<form class="container-no-bottom-margin" asp-action="Edit" asp-controller="Comment" method="post">
 		<div class="d-flex mt-5 gap-3">
 			<div class="profile-box d-none d-xxl-block">
 				<a href="#"><img src="/images/avatar-11.png" class="max-un" alt="icon"></a>
 			</div>
-			<div class="form-content input-area py-1 d-flex gap-2 align-items-center w-100">
-				<input asp-for="Text" placeholder=@Model.Text />
-				<div class="file-input d-flex gap-1 gap-md-2">
-					<div class="file-upload">
-						<label class="file">
-							@* <input type="file"> *@
-							<span class="file-custom border-0 d-grid text-center">
-								<span class="material-symbols-outlined mat-icon m-0 xxltxt"> gif_box </span>
-							</span>
-						</label>
-					</div>
-					<div class="file-upload">
-						<label class="file">
-							@* <input type="file"> *@
-							<span class="file-custom border-0 d-grid text-center">
-								<span class="material-symbols-outlined mat-icon m-0 xxltxt"> perm_media </span>
-							</span>
-						</label>
-					</div>
-					<span class="mood-area">
-						<span class="material-symbols-outlined mat-icon m-0 xxltxt"> mood </span>
-					</span>
-				</div>
-			</div>
+			<textarea asp-for="Text" cols="10" rows="2" placeholder="Write something to Luigi.."></textarea>
+			<ul class="d-flex justify-content-between flex-wrap mt-3 gap-3 container-no-bottom-margin">
+				<li class="d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#goLiveMod">
+					<img src="/images/icon/live-video.png" class="max-un" alt="icon">
+					<span>Live</span>
+				</li>
+				<li class="d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#photoVideoMod">
+					<img src="/images/icon/vgallery.png" class="max-un" alt="icon">
+					<span>Photo/Video</span>
+				</li>
+				<li class="d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#activityMod">
+					<img src="/images/icon/emoji-laughing.png" class="max-un" alt="icon">
+					<span>Fallings/Activity</span>
+				</li>
+				<li>
+					<button class="cmn-btn px-2 px-sm-5 px-lg-6">
+						<i class="material-symbols-outlined mat-icon m-0 fs-xxl"> near_me </i>
+					</button>
+				</li>
+			</ul>
 		</div>
+
 	</form>
 </div>
+
 @section Scripts {
 	<partial name="_ValidationScriptsPartial">
 }

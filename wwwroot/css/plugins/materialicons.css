@@ -33,7 +33,7 @@
     font-variation-settings: 'wght' var(--mat-wght), 'FILL' var(--mat-fill), 'GRAD' var(--mat-grad);
 }
 
-.fw-300{
+.fw-300 {
     font-weight: 300;
 }
 .fw-400{

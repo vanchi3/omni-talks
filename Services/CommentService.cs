@@ -1,10 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OmniTalks.Contracs;
-using OmniTalks.Controllers;
 using OmniTalks.Data;
-using OmniTalks.Models;
+using OmniTalks.Models.CommentViewModels;
 using OmniTalks.Models.Domein;
-using System.CodeDom;
 
 namespace OmniTalks.Services
 {

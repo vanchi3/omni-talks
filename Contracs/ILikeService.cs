@@ -1,9 +1,9 @@
-﻿using OmniTalks.Models;
+﻿using OmniTalks.Models.PostViewModel;
 
 namespace OmniTalks.Contracs
 {
-    public interface ILikeService
-    {
-        public Task Add(PostLikeViewModel model,string id);
-    }
+	public interface ILikeService
+	{
+		public Task Add(PostLikeViewModel model, string id);
+	}
 }

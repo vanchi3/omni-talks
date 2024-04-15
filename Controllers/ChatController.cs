@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OmniTalks.Contracs;
-using OmniTalks.Models;
+using OmniTalks.Models.ChatViewModels;
 
 namespace OmniTalks.Controllers
 {
+	[Authorize]
 	public class ChatController : BaseController
 	{
 		private IMessageService _messageService;
@@ -39,7 +41,9 @@ namespace OmniTalks.Controllers
 			ChatViewModel model = new ChatViewModel()
 			{
 				Reciever = user,
-				Messages = await _chatService.ShowMessages(currentUser)
+				Messages = await _chatService.ShowMessages(currentUser, id),
+				SidebarChats = await _chatService.ShowAllChats(new Guid(CurrentUserId)),
+				CurrentChatId = id
 			};
 
 			if (!ModelState.IsValid)
@@ -53,9 +57,11 @@ namespace OmniTalks.Controllers
 		[HttpPost]
 		public async Task<IActionResult> AddMessage(MessageViewModel model)
 		{
+			var sendToUser = model.User2Id;
+
 			if (!ModelState.IsValid)
 			{
-				return Redirect($"/Chat/ShowChat/{model.User2Id}");
+				return Redirect($"/Chat/ShowChat/{sendToUser}");
 			}
 
 			model.User1Id = new Guid(CurrentUserId);

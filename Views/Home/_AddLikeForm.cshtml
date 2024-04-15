@@ -1,4 +1,5 @@
-﻿@model PostLikeViewModel
+﻿@using OmniTalks.Models.PostViewModel
+@model PostLikeViewModel
 <form asp-action="Like" asp-controller="Like">
 	<input type="hidden" asp-for="@Model.PostId" />
 	<button type="submit" class="d-center gap-1 gap-sm-2 mdtxt">

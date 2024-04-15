@@ -48,6 +48,13 @@ namespace OmniTalks.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("ae27e064-4c1d-4082-a81b-848ee36c08a4"),
+                            Name = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -134,6 +141,13 @@ namespace OmniTalks.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("6171a065-a985-43f1-ba4c-0703775e2dc4"),
+                            RoleId = new Guid("ae27e064-4c1d-4082-a81b-848ee36c08a4")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
@@ -157,6 +171,25 @@ namespace OmniTalks.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("OmniTalks.Models.Domein.Category", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Bio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("OmniTalks.Models.Domein.Chat", b =>
                 {
                     b.Property<Guid>("Id")
@@ -175,7 +208,7 @@ namespace OmniTalks.Migrations
 
                     b.HasIndex("User2Id");
 
-                    b.ToTable("Chats", (string)null);
+                    b.ToTable("Chats");
                 });
 
             modelBuilder.Entity("OmniTalks.Models.Domein.Comment", b =>
@@ -200,7 +233,7 @@ namespace OmniTalks.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comments", (string)null);
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("OmniTalks.Models.Domein.CommentLike", b =>
@@ -215,22 +248,31 @@ namespace OmniTalks.Migrations
 
                     b.HasIndex("CommentId");
 
-                    b.ToTable("CommentsLikes", (string)null);
+                    b.ToTable("CommentsLikes");
                 });
 
-            modelBuilder.Entity("OmniTalks.Models.Domein.Connection", b =>
+            modelBuilder.Entity("OmniTalks.Models.Domein.Follow", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("FollowerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsFollowing")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Connections", (string)null);
+                    b.HasIndex("FollowerId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Following");
                 });
 
             modelBuilder.Entity("OmniTalks.Models.Domein.Message", b =>
@@ -256,13 +298,16 @@ namespace OmniTalks.Migrations
 
                     b.HasIndex("ChatId");
 
-                    b.ToTable("Messages", (string)null);
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("OmniTalks.Models.Domein.Post", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Content")
@@ -274,9 +319,11 @@ namespace OmniTalks.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.HasIndex("UserId");
 
-                    b.ToTable("Posts", (string)null);
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("OmniTalks.Models.Domein.PostLike", b =>
@@ -291,7 +338,7 @@ namespace OmniTalks.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.ToTable("PostsLikes", (string)null);
+                    b.ToTable("PostsLikes");
                 });
 
             modelBuilder.Entity("OmniTalks.Models.Domein.User", b =>
@@ -366,27 +413,26 @@ namespace OmniTalks.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
 
-            modelBuilder.Entity("OmniTalks.Models.Domein.UserConnection", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ConnectonId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ConnectonId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserConnections", (string)null);
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("6171a065-a985-43f1-ba4c-0703775e2dc4"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "ad266228-ff55-441f-8281-ade9522e8e32",
+                            Email = "admin@mail.com",
+                            EmailConfirmed = false,
+                            FirstName = "admin@mail.com",
+                            LastName = "admin@mail.com",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "admin@mail.com",
+                            NormalizedUserName = "admin@mail.com",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPAKxsKbuliVuabpdJIg0sAq5YI+6fpFtwRtjvgO/yX5zTCaGiSQWToHxRV/1ZpadQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "8931d00b-b725-4196-b265-fe2fc8b52884",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@mail.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -497,6 +543,25 @@ namespace OmniTalks.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("OmniTalks.Models.Domein.Follow", b =>
+                {
+                    b.HasOne("OmniTalks.Models.Domein.User", "Follower")
+                        .WithMany("Followers")
+                        .HasForeignKey("FollowerId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("OmniTalks.Models.Domein.User", "User")
+                        .WithMany("Following")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Follower");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("OmniTalks.Models.Domein.Message", b =>
                 {
                     b.HasOne("OmniTalks.Models.Domein.Chat", "Chat")
@@ -510,11 +575,19 @@ namespace OmniTalks.Migrations
 
             modelBuilder.Entity("OmniTalks.Models.Domein.Post", b =>
                 {
+                    b.HasOne("OmniTalks.Models.Domein.Category", "Category")
+                        .WithMany("Posts")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("OmniTalks.Models.Domein.User", "User")
                         .WithMany("Posts")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("Category");
 
                     b.Navigation("User");
                 });
@@ -538,23 +611,9 @@ namespace OmniTalks.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("OmniTalks.Models.Domein.UserConnection", b =>
+            modelBuilder.Entity("OmniTalks.Models.Domein.Category", b =>
                 {
-                    b.HasOne("OmniTalks.Models.Domein.Connection", "Connection")
-                        .WithMany("UserConnections")
-                        .HasForeignKey("ConnectonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("OmniTalks.Models.Domein.User", "User")
-                        .WithMany("UserConnections")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Connection");
-
-                    b.Navigation("User");
+                    b.Navigation("Posts");
                 });
 
             modelBuilder.Entity("OmniTalks.Models.Domein.Chat", b =>
@@ -565,11 +624,6 @@ namespace OmniTalks.Migrations
             modelBuilder.Entity("OmniTalks.Models.Domein.Comment", b =>
                 {
                     b.Navigation("CommentLikes");
-                });
-
-            modelBuilder.Entity("OmniTalks.Models.Domein.Connection", b =>
-                {
-                    b.Navigation("UserConnections");
                 });
 
             modelBuilder.Entity("OmniTalks.Models.Domein.Post", b =>
@@ -585,13 +639,15 @@ namespace OmniTalks.Migrations
 
                     b.Navigation("Comments");
 
+                    b.Navigation("Followers");
+
+                    b.Navigation("Following");
+
                     b.Navigation("Posts");
 
                     b.Navigation("RecievedChat");
 
                     b.Navigation("SentedChat");
-
-                    b.Navigation("UserConnections");
                 });
 #pragma warning restore 612, 618
         }

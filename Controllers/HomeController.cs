@@ -1,28 +1,32 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using OmniTalks.Contracs;
-using OmniTalks.Models;
-using System.Diagnostics;
-using System.Security.Claims;
+using OmniTalks.Models.PostViewModel;
+using OmniTalks.Models.CategoryViewModels;
+using OmniTalks.Services;
 
 namespace OmniTalks.Controllers
 {
     public class HomeController : BaseController
     {
         private IPostService _postService;
-        public HomeController(IPostService postService)
+        private ICategoryService _categoryService;
+
+        public HomeController(IPostService postService, ICategoryService categoryService)
         {
             _postService = postService;
+            _categoryService = categoryService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            if (!User?.Identity?.IsAuthenticated ?? false)
-            {
-                return RedirectToAction("Login","User");
-            }
-                ViewBag.Username = UserName;
+            ViewBag.Username = UserName;
             ViewBag.CurrentUserId = new Guid(CurrentUserId);
+
+            List<CategoryViewModel> categories = await _categoryService.GetAll();
+            this.ViewBag.CategoriesList = new SelectList(categories, "Id", "Name");
+            
             List<PostViewModel> models = await this._postService.All();
 
             return View(models);
@@ -34,7 +38,7 @@ namespace OmniTalks.Controllers
         //    await this._likeService.Add(postLikeVM);
         //    return RedirectToAction("Index", "Home");
         //}
-        
+
         public IActionResult Privacy()
         {
             return View();

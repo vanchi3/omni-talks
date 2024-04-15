@@ -1,8 +1,6 @@
 ﻿using OmniTalks.Models.Domein;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 
-namespace OmniTalks.Models
+namespace OmniTalks.Models.ChatViewModels
 {
 	public class ShowMessageViewModel
 	{
@@ -14,7 +12,7 @@ namespace OmniTalks.Models
 
 		public Guid ChatId { get; set; }
 
-		public bool IsCurrent {  get; set; }
+		public bool IsCurrent { get; set; }
 		public Chat Chat { get; set; } = null!;
 	}
 }

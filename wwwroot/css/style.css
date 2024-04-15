@@ -2572,3 +2572,14 @@ li {
     width: 100% !important;
   }
 }/*# sourceMappingURL=style.css.map */
+
+.full-width {
+    width: calc(1200px); 
+    margin: 0 auto; 
+    padding: 0 20px; 
+    box-sizing: border-box;
+}
+
+.container-no-bottom-margin {
+    margin: 40px 40px 0 40px; 
+}

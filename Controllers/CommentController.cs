@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OmniTalks.Contracs;
-using OmniTalks.Models;
-using OmniTalks.Models.Domein;
-using System.ComponentModel.DataAnnotations;
+using OmniTalks.Models.CommentViewModels;
 
 namespace OmniTalks.Controllers
 {
+	[Authorize]
 	public class CommentController : BaseController
 	{
 		private ICommentService _service;
@@ -25,11 +25,11 @@ namespace OmniTalks.Controllers
 		public async Task<IActionResult> Add(AddCommentViewModel model)
 		{
 			string currentId = CurrentUserId;
-            if (currentId == null)
-            {
-                return NotFound();
-            }
-            await this._service.Add(model, currentId);
+			if (currentId == null)
+			{
+				return NotFound();
+			}
+			await this._service.Add(model, currentId);
 			return RedirectToAction("Index", "Home");
 		}
 		[HttpGet]
@@ -37,17 +37,17 @@ namespace OmniTalks.Controllers
 		{
 			Guid userId = new Guid(CurrentUserId);
 			Guid commenterId = await this._service.GetById(id);
-            if (userId == null || commenterId == null)
-            {
-                return NotFound();
-            }
-            if (commenterId == userId)
+			if (userId == null || commenterId == null)
+			{
+				return NotFound();
+			}
+			if (commenterId == userId)
 			{
 				CommentViewModel model = await this._service.Rewrite(id);
 
 				if (!ModelState.IsValid)
 				{
-					return RedirectToAction($"Index","Home");
+					return RedirectToAction($"Index", "Home");
 				}
 
 				return View(model);
@@ -60,7 +60,7 @@ namespace OmniTalks.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Edit(CommentViewModel model)
 		{
-			
+
 			await this._service.Edit(model);
 			return RedirectToAction("Index", "Home");
 		}
@@ -75,29 +75,29 @@ namespace OmniTalks.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Remove(CommentViewModel model)
 		{
-            if (!ModelState.IsValid)
-            {
-                return RedirectToAction("Index","Home");
-            }
+			if (!ModelState.IsValid)
+			{
+				return RedirectToAction("Index", "Home");
+			}
 
-            Guid userId = new Guid(CurrentUserId);
-            if (userId == null)
-            {
-                return NotFound();
-            }
-            await this._service.Remove(model.Id,userId);
+			Guid userId = new Guid(CurrentUserId);
+			if (userId == null)
+			{
+				return NotFound();
+			}
+			await this._service.Remove(model.Id, userId);
 			return RedirectToAction("Index", "Home");
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> AddLike(CommentLikeViewModel model)
 		{
-            if (!ModelState.IsValid)
-            {
-                return RedirectToAction("Index", "Home");
-            }
+			if (!ModelState.IsValid)
+			{
+				return RedirectToAction("Index", "Home");
+			}
 
-            string id = CurrentUserId;
+			string id = CurrentUserId;
 			await _service.AddLike(model, id);
 			return RedirectToAction("Index", "Home");
 		}

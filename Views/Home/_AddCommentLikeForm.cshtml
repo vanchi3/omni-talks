@@ -1,4 +1,5 @@
-﻿@model CommentLikeViewModel
+﻿@using OmniTalks.Models.CommentViewModels
+@model CommentLikeViewModel
  <form asp-action="AddLike" asp-controller="Comment" method="post">
 	<input type="hidden" asp-for="@Model.CommentId" />
 	<button type="submit" class="d-center gap-1 gap-sm-2 mdtxt">

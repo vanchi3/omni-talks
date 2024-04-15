@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using OmniTalks.Data.Configuraton;
 using OmniTalks.Models.Domein;
 
 namespace OmniTalks.Data
@@ -14,12 +15,12 @@ namespace OmniTalks.Data
 
 		public DbSet<Post> Posts { get; set; }
 		public DbSet<Message> Messages { get; set; }
-		public DbSet<Connection> Connections { get; set; }
-		public DbSet<UserConnection> UserConnections { get; set; }
 		public DbSet<PostLike> PostsLikes { get; set; }
 		public DbSet<Comment> Comments { get; set; }
 		public DbSet<CommentLike> CommentsLikes { get; set; }
 		public DbSet<Chat> Chats { get; set; }
+		public DbSet<Follow> Following { get; set; }
+		public DbSet<Category> Categories { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
@@ -41,7 +42,7 @@ namespace OmniTalks.Data
 				.WithOne(s => s.User1)
 				.HasForeignKey(s => s.User1Id)
 				.OnDelete(DeleteBehavior.NoAction);
-			
+
 			builder.Entity<User>()
 				.HasMany(u => u.RecievedChat)
 				.WithOne(r => r.User2)
@@ -54,14 +55,31 @@ namespace OmniTalks.Data
 				.HasForeignKey(cm => cm.UserId)
 				.OnDelete(DeleteBehavior.NoAction);
 
+			builder.Entity<User>()
+				.HasMany(u => u.Following)
+				.WithOne(f => f.User)
+				.HasForeignKey(f => f.UserId)
+				.OnDelete(DeleteBehavior.NoAction);
+
+			builder.Entity<User>()
+			.HasMany(u => u.Followers)
+			.WithOne(fw => fw.Follower)
+			.HasForeignKey(fw => fw.FollowerId)
+			.OnDelete(DeleteBehavior.NoAction);
+
+
 			// Composite Keys
 			builder.Entity<PostLike>()
 					.HasKey(pl => new { pl.UserId, pl.PostId });
 
-            builder.Entity<CommentLike>()
-                    .HasKey(pl => new { pl.UserId, pl.CommentId });
+			builder.Entity<CommentLike>()
+					.HasKey(pl => new { pl.UserId, pl.CommentId });
 
-            base.OnModelCreating(builder);
+			builder.ApplyConfiguration(new RoleConfiguration());
+			builder.ApplyConfiguration(new UserConfiguration());
+			builder.ApplyConfiguration(new UserRoleConfiguration());
+
+			base.OnModelCreating(builder);
 		}
 	}
 }

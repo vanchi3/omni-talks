@@ -1,4 +1,4 @@
-﻿namespace OmniTalks.Models
+﻿namespace OmniTalks.Models.CommentViewModels
 {
 	public class CommentLikeViewModel
 	{

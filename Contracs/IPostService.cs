@@ -1,16 +1,15 @@
-﻿using OmniTalks.Models;
-using OmniTalks.Models.Domein;
+﻿using OmniTalks.Models.PostViewModel;
 
 namespace OmniTalks.Contracs
 {
-    public interface IPostService
-    {
-        public Task Add(PostViewModel model,string currentId);
-        public Task<List<PostViewModel>> All();
-        public Task Remove(Guid id,Guid userId);
-        public Task Edit(PostViewModel model);
-        //public Task<PostViewModel> Rewrite(Guid id);
-        public Task<PostViewModel> GetById(Guid id);
+	public interface IPostService
+	{
+		public Task Add(PostViewModel model, string currentId);
+		Task<List<PostViewModel>> All(Guid? userId = null);
+		public Task Remove(Guid id, Guid userId, bool isAdmin);
+		public Task Edit(PostViewModel model);
+		//public Task<PostViewModel> Rewrite(Guid id);
+		public Task<PostViewModel> GetById(Guid id);
 
 	}
 }

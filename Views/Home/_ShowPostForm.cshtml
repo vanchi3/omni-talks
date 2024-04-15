@@ -1,4 +1,6 @@
-﻿@model ICollection<PostViewModel>
+﻿@using OmniTalks.Models.PostViewModel
+@using OmniTalks.Models.CommentViewModels
+@model ICollection<PostViewModel>
 <div class="post-item d-flex flex-column gap-5 gap-md-7" id="news-feed">
 	@foreach (var item in Model)
 	{
@@ -11,7 +13,7 @@
 						</div>
 						<div class="info-area">
 							<h6 class="m-0"><a href="@($"User/OtherProfile/{item.UserId}")">@item.UserName</a></h6>
-							<span class="mdtxt status">Active</span>
+							<span class="mdtxt status">@item.Category.Name</span>
 						</div>
 					</div>
 					<div class="btn-group cus-dropdown">
@@ -84,7 +86,6 @@
 				</div>
 				<div class="react-list d-flex flex-wrap gap-6 align-items-center text-center">
 					<button class="mdtxt">@item.Comments.Count Comments</button>
-					<button class="mdtxt">1 Shares</button>
 					<button class="mdtxt">@item.LikesCount Likes </button>
 				</div>
 			</div>
@@ -94,14 +95,6 @@
 					addLikeVM.PostId = item.Id;
 				}
 				<partial name="_AddLikeForm" model="addLikeVM">
-					<button class="d-center gap-1 gap-sm-2 mdtxt" asp-action="">
-						<i class="material-symbols-outlined mat-icon"> chat </i>
-						Comment
-					</button>
-					<button class="d-center gap-1 gap-sm-2 mdtxt">
-						<i class="material-symbols-outlined mat-icon"> share </i>
-						Share
-					</button>
 			</div>
 			@{
 				AddCommentViewModel addCommentViewModel = new AddCommentViewModel();

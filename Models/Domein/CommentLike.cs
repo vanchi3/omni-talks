@@ -13,5 +13,5 @@ namespace OmniTalks.Models.Domein
 		[ForeignKey(nameof(Comment))]
 		public Guid CommentId { get; set; }
 		public Comment Comment { get; set; } = null!;
-    }
+	}
 }

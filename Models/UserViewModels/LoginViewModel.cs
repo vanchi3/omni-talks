@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OmniTalks.Models
+namespace OmniTalks.Models.UserViewModels
 {
 	public class LoginViewModel
 	{
@@ -11,5 +11,5 @@ namespace OmniTalks.Models
 		[DataType(DataType.Password)]
 		[StringLength(20, MinimumLength = 6)]
 		public string Password { get; set; }
-    }
+	}
 }

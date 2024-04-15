@@ -1,0 +1,72 @@
+﻿@using OmniTalks.Models.UserViewModels
+@model SideBarViewModel
+<div class="profile-sidebar cus-scrollbar p-5">
+	<div class="d-block d-lg-none position-absolute end-0 top-0">
+		<button class="button profile-close">
+			<i class="material-symbols-outlined mat-icon fs-xl"> close </i>
+		</button>
+	</div>
+	@if (Model.Id != default)
+	{
+		string href = $"User/OtherProfile/{Model.Id}";
+		<a href=@href class="profile-pic d-flex gap-2 align-items-center">
+			<div class="avatar position-relative">
+				<img class="avatar-img max-un" src="/images/avatar-1.png" alt="avatar">
+
+			</div>
+			<div class="text-area mt-1">
+				<h6 class="m-0 mb-1"><a href="@href">@ViewBag.UserName</a></h6>
+			</div>
+		</a>
+	}
+	else
+	{
+		<div class="text-area mt-1">
+			<h6 class="m-0 mb-1"><a href="/User/Login">@ViewBag.UserName</a></h6>
+		</div>
+	}
+	<ul class="profile-link mt-7 mb-7 pb-7">
+		<li>
+			<a asp-controller="Home" asp-action="Index" class="d-flex gap-4 active">
+				<i class="material-symbols-outlined mat-icon"> home </i>
+				<span>Home</span>
+			</a>
+		</li>
+		<li>
+			<a href="friend-request.html" class="d-flex gap-4">
+				<i class="material-symbols-outlined mat-icon"> person </i>
+				<span>People</span>
+			</a>
+		</li>
+		<li>
+			<a href="pages.html" class="d-flex gap-4">
+				<i class="material-symbols-outlined mat-icon"> perm_media </i>
+				<span>Pages</span>
+			</a>
+		</li>
+		<li>
+			<a href="saved-post.html" class="d-flex gap-4">
+				<i class="material-symbols-outlined mat-icon"> sync_saved_locally </i>
+				<span>Saved</span>
+			</a>
+		</li>
+		@if (this.User.IsInRole("Admin"))
+		{
+			<li>
+				<form asp-controller ="Category" asp-action="Add" method="get">
+					<button class="d-flex gap-4">
+						<i class="material-symbols-outlined mat-icon"> bookmark_add </i>
+						<span>Create Category</span>
+					</button>
+				</form>
+			</li>
+
+		}
+		<li>
+			<a href="setting.html" class="d-flex gap-4">
+				<i class="material-symbols-outlined mat-icon"> settings </i>
+				<span>Settings</span>
+			</a>
+		</li>
+	</ul>
+</div>

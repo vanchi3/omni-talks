@@ -1,4 +1,5 @@
-﻿@model List<ShowMessageViewModel>
+﻿@using OmniTalks.Models.ChatViewModels
+@model List<ShowMessageViewModel>
 <form asp-controller="Chat" asp-action="_ShowMessages">
 	@foreach (var message in Model)
 	{
