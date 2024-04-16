@@ -21,24 +21,12 @@
 							<i class="material-symbols-outlined fs-xxl m-0"> more_horiz </i>
 						</button>
 						<ul class="dropdown-menu p-4 pt-2">
-							<li>
-								<a class="droplist d-flex align-items-center gap-2" href="#">
-									<i class="material-symbols-outlined mat-icon"> bookmark_add </i>
-									<span>Saved Post</span>
-								</a>
-							</li>
-							<li>
+							@* <li>
 								<a class="droplist d-flex align-items-center gap-2" href="#">
 									<i class="material-symbols-outlined mat-icon"> person_remove </i>
 									<span>Unfollow</span>
 								</a>
-							</li>
-							<li>
-								<a class="droplist d-flex align-items-center gap-2" href="#">
-									<i class="material-symbols-outlined mat-icon"> hide_source </i>
-									<span>Hide Post</span>
-								</a>
-							</li>
+							</li> *@
 							<li>
 								@{
 									PostViewModel postVM = new PostViewModel();
@@ -48,21 +36,9 @@
 							</li>
 							<li>
 								<a class="droplist d-flex align-items-center gap-2" asp-controller="Post" asp-action="Edit">
-									 <a href="@($"Post/Edit/{item.Id}")">Edit Post</a>
+									<a href="@($"Post/Edit/{item.Id}")">Edit Post</a>
 								</a>
 
-							</li>
-							<li>
-								<a class="droplist d-flex align-items-center gap-2" href="#">
-									<i class="material-symbols-outlined mat-icon"> lock </i>
-									<span>Block</span>
-								</a>
-							</li>
-							<li>
-								<a class="droplist d-flex align-items-center gap-2" href="#">
-									<i class="material-symbols-outlined mat-icon"> flag </i>
-									<span>Report Post</span>
-								</a>
 
 							</li>
 						</ul>
@@ -72,18 +48,10 @@
 					<p class="description">@item.Content</p>
 				</div>
 				@* <div class="post-img">
-					<img src="/images/post-img-1.png" class="w-100" alt="image">
-				</div> *@
+			<img src="/images/post-img-1.png" class="w-100" alt="image">
+			</div> *@
 			</div>
 			<div class="total-react-share pb-4 d-center gap-2 flex-wrap justify-content-between">
-				<div class="friends-list d-flex gap-3 align-items-center text-center">
-					<ul class="d-flex align-items-center justify-content-center">
-						<li><img src="/images/avatar-2.png" alt="image"></li>
-						<li><img src="/images/avatar-3.png" alt="image"></li>
-						<li><img src="/images/avatar-4.png" alt="image"></li>
-						<li><span class="mdtxt d-center">8+</span></li>
-					</ul>
-				</div>
 				<div class="react-list d-flex flex-wrap gap-6 align-items-center text-center">
 					<button class="mdtxt">@item.Comments.Count Comments</button>
 					<button class="mdtxt">@item.LikesCount Likes </button>
@@ -95,6 +63,10 @@
 					addLikeVM.PostId = item.Id;
 				}
 				<partial name="_AddLikeForm" model="addLikeVM">
+
+					<div class="mdtxt color-grey">
+						@item.CreatedDate
+					</div>
 			</div>
 			@{
 				AddCommentViewModel addCommentViewModel = new AddCommentViewModel();
@@ -102,7 +74,7 @@
 			}
 			<partial name="_AddComment" model="addCommentViewModel">
 
-			<partial name="_ShowComments" model="item.Comments">
+				<partial name="_ShowComments" model="item.Comments">
 		</div>
 	}
 </div>

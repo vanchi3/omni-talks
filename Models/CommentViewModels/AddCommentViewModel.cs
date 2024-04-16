@@ -9,5 +9,7 @@ namespace OmniTalks.Models.CommentViewModels
 
 		[Required]
 		public string Text { get; set; } = null!;
+
+		public string UserPhtotUrl { get; set; }
 	}
 }

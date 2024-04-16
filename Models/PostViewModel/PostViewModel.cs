@@ -12,10 +12,13 @@ namespace OmniTalks.Models.PostViewModel
 		public string ImgUrl { get; set; }
 
 		public string UserName { get; set; }
+		public DateTime CreatedDate { get; set; }
 
 		public Guid UserId { get; set; }
 
         public Guid CurrentUserId { get; set; }
+
+		public string UserPhotoUrl { get; set; }
 
         public int LikesCount { get; set; }
 

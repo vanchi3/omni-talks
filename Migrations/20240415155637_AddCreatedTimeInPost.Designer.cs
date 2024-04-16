@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OmniTalks.Data;
 
@@ -11,9 +12,11 @@ using OmniTalks.Data;
 namespace OmniTalks.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240415155637_AddCreatedTimeInPost")]
+    partial class AddCreatedTimeInPost
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -319,10 +322,6 @@ namespace OmniTalks.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getdate()");
 
-                    b.Property<string>("ImgUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
@@ -401,12 +400,6 @@ namespace OmniTalks.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ProfilePhtotoUrl")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasDefaultValueSql("C:\\Users\\Ivana\\Desktop\\Dimplomen Proekt\\OmniTalks\\wwwroot\\images\\avatar-7.png");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -434,7 +427,7 @@ namespace OmniTalks.Migrations
                         {
                             Id = new Guid("6171a065-a985-43f1-ba4c-0703775e2dc4"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3ccff30f-0aec-43d7-b6ef-bf56d08d0591",
+                            ConcurrencyStamp = "e5e9b0cf-d5b1-4a9d-8798-fd012162ece4",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             FirstName = "admin@mail.com",
@@ -442,9 +435,9 @@ namespace OmniTalks.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@mail.com",
                             NormalizedUserName = "admin@mail.com",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKIAEnOjr3w5XvMCAuKtH0d1CbvROyX3jv8ztCMY6xkRcZj0Kqa1HQISIQjdJb1DKQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEgpXwBm1/tNAXxyPlFKLmmmyMbgAASDFBf2GZqnrzyNDLXCxg11CEQLHIrFdvuVSw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "eee941b5-9663-450c-b6ca-bd9058cf93e0",
+                            SecurityStamp = "34859c20-7361-43c3-b7fa-e3d4fa5eaca2",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });

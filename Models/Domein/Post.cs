@@ -10,6 +10,8 @@ namespace OmniTalks.Models.Domein
 
 		[Required]
 		public string Content { get; set; } = null!;
+		[Required]
+		public DateTime CreatedDate { get; set; }
 
 		[Required]
 		[ForeignKey(nameof(User))]
@@ -25,6 +27,6 @@ namespace OmniTalks.Models.Domein
 		public Guid CategoryId { get; set; }
 		public Category Category { get; set; } = null!;
 
-		//public string ImgUrl { get; set; }
+		public string ImgUrl { get; set; }
 	}
 }

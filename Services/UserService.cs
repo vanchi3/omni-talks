@@ -2,6 +2,7 @@
 using OmniTalks.Contracs;
 using OmniTalks.Data;
 using OmniTalks.Models.Domein;
+using OmniTalks.Models.PostViewModel;
 using OmniTalks.Models.UserViewModels;
 
 namespace OmniTalks.Services
@@ -32,6 +33,33 @@ namespace OmniTalks.Services
 				model.IsFollowing = false;
 			}
 			return contains;
+		}
+
+		public async Task<FollowerViewModel> FollowerAndFollowingDistribution(Guid currentUserId,Guid id, List<PostViewModel> models)
+		{
+			FollowerViewModel model = new FollowerViewModel
+			{
+				FollowerId = currentUserId,
+				UserId = id,
+				Following = await _context.Following
+					.Include(f => f.User)
+					.Where(f => f.FollowerId == id)
+					.ToListAsync(),
+				Followers = await this._context.Following
+					.Include(f => f.Follower)
+					.Where(f => f.UserId == id)
+					.ToListAsync(),
+				User = await _context.Users
+					.Where(x => x.Id == id)
+					.Select(u => new UserViewModel()
+					{
+						UserName = u.UserName,
+						ProfilePhotoUrl = u.ProfilePhtotoUrl
+					}).FirstOrDefaultAsync(),
+				MyPosts = models
+			};
+
+			return model;
 		}
 	}
 }

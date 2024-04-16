@@ -1,4 +1,5 @@
 ﻿using OmniTalks.Models.Domein;
+using OmniTalks.Models.PostViewModel;
 using OmniTalks.Models.UserViewModels;
 
 namespace OmniTalks.Contracs
@@ -6,7 +7,10 @@ namespace OmniTalks.Contracs
 	public interface IUserService
 	{
 		Task<User?> GetById(Guid id);
-		public Task<bool> Conatins(Guid id, FollowerViewModel model);
+		Task<bool> Conatins(Guid id, FollowerViewModel model);
 
-    }
+		Task<FollowerViewModel> FollowerAndFollowingDistribution(Guid currenetUserId,Guid id, List<PostViewModel> models);
+
+
+	}
 }

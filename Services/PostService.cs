@@ -28,7 +28,9 @@ namespace OmniTalks.Services
 				Id = Guid.NewGuid(),
 				Content = model.Content,
 				UserId = Guid.Parse(currentId),
-				CategoryId = model.CategoryId
+
+				CategoryId = model.CategoryId,
+				CreatedDate = DateTime.Now,
 			};
 
 			await _context.Posts.AddAsync(post);
@@ -50,6 +52,7 @@ namespace OmniTalks.Services
 					Content = p.Content,
 					UserName = p.User.UserName,
 					UserId = p.User.Id,
+					CreatedDate = p.CreatedDate,
 					Comments = p.Comments.Select(c => new CommentViewModel()
 					{
 						Id = c.Id,
@@ -63,6 +66,7 @@ namespace OmniTalks.Services
 					},
 					LikesCount = p.PostLikes.Count(),
 				})
+				.OrderByDescending(x => x.CreatedDate)
 				.ToListAsync();
 
 			return postViewModels;

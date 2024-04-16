@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.Runtime;
 
 namespace OmniTalks.Models.Domein
 {
@@ -21,6 +22,10 @@ namespace OmniTalks.Models.Domein
 		public List<Follow> Following { get; set; }
 
 		public List<Follow> Followers { get; set; }
+
+		//public string BackgroudPhotoUrl {  get; set; }
+
+		public string ProfilePhtotoUrl { get; set; }
 		// ako sh triesh useri taka ->
 		//public bool IsDeleted{ get; set; }
 	}

@@ -2583,3 +2583,10 @@ li {
 .container-no-bottom-margin {
     margin: 40px 40px 0 40px; 
 }
+.almost-no-margin {
+    padding: 10px 10px 0 10px; 
+}
+
+.color-grey{
+     color :#A6ACB6
+}

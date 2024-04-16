@@ -70,7 +70,9 @@ namespace OmniTalks.Controllers
 				FirstName = model.FirstName,
 				LastName = model.LastName,
 				Email = model.Email,
-				UserName = model.UserName
+				UserName = model.UserName,
+				ProfilePhtotoUrl = model.ProfilePhotoUrl
+				
 			};
 			var result = await _userManger.CreateAsync(user, model.Password);
 
@@ -151,26 +153,7 @@ namespace OmniTalks.Controllers
 
 			List<PostViewModel> models = await this._postService.All(id);
 
-			FollowerViewModel model = new FollowerViewModel
-			{
-				FollowerId = new Guid(CurrentUserId),
-				UserId = id,
-				Following = await _context.Following
-					.Include(f => f.User)
-					.Where(f => f.FollowerId == id)
-					.ToListAsync(),
-				Followers = await this._context.Following
-					.Include(f => f.Follower)
-					.Where(f => f.UserId == id)
-					.ToListAsync(),
-				User = await _context.Users
-					.Where(x => x.Id == id)
-					.Select(u => new UserViewModel() 
-					{
-						UserName = u.UserName,
-					}).FirstOrDefaultAsync(),
-				MyPosts = models
-			};
+			FollowerViewModel model = await _userService.FollowerAndFollowingDistribution(new Guid(CurrentUserId), id, models);
 			var contains = await _userService.Conatins(id, model);
 
 			return View(model);
