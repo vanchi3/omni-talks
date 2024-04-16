@@ -1,4 +1,6 @@
-﻿using OmniTalks.Models.PostViewModel;
+﻿using OmniTalks.Models.Domein;
+using OmniTalks.Models.PostViewModel;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace OmniTalks.Contracs
 {

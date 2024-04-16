@@ -27,6 +27,6 @@ namespace OmniTalks.Models.Domein
 		public Guid CategoryId { get; set; }
 		public Category Category { get; set; } = null!;
 
-		public string ImgUrl { get; set; }
+		public string? ImgUrl { get; set; } = null!;
 	}
 }

@@ -68,7 +68,7 @@ namespace OmniTalks.Data
 			.OnDelete(DeleteBehavior.NoAction);
 
 			builder.Entity<Post>().Property(p => p.CreatedDate).HasDefaultValueSql("getdate()");
-			builder.Entity<User>().Property(p => p.ProfilePhtotoUrl).HasDefaultValueSql("C:\\Users\\Ivana\\Desktop\\Dimplomen Proekt\\OmniTalks\\wwwroot\\images\\avatar-7.png");
+			builder.Entity<User>().Property(p => p.ProfilePhtotoUrl).HasDefaultValue("/images/avatar-7.png");
 
 			// Composite Keys
 			builder.Entity<PostLike>()

@@ -1,4 +1,6 @@
 ﻿@using OmniTalks.Models.ChatViewModels
+@using OmniTalks.Models.PostViewModel
+
 
 <header class="header-section header-menu">
 	<nav class="navbar navbar-expand-lg p-0">
@@ -44,24 +46,52 @@
 						</div>
 					}
 					<div class="single-item d-block profile-area position-relative">
-						<div class="profile-pic d-flex align-items-center">
-							<span class="avatar cmn-head active-status">
-								<img class="avatar-img max-un" src="/images/avatar-1.png" alt="avatar">
-							</span>
-						</div>
-						<div class="main-area p-5 profile-content">
-							<div class="head-area">
-								<div class="d-flex gap-3 align-items-center">
-									<div class="avatar-item">
-										<img class="avatar-img max-un" src="/images/avatar-1.png" alt="avatar">
-									</div>
-									<div class="text-area">
-										<h6 class="m-0 mb-1">@(this.User?.Identity?.Name ?? "Guest")</h6>
-									</div>
-								</div>
+						@if (this?.User?.Identity?.IsAuthenticated ?? false)
+						{
+							<div class="profile-pic d-flex align-items-center">
+								<span class="avatar cmn-head active-status">
+									<img class="avatar-img max-un" src=@ViewData["UserProfilePhoto"] alt="avatar" width="48">
+								</span>
 							</div>
+						}
+						else
+						{
+							<div class="profile-pic d-flex align-items-center">
+								<span class="avatar cmn-head active-status">
+									<img class="avatar-img max-un" src=\images\avatar-7.png alt="avatar">
+								</span>
+							</div>
+						}
+						<div class="main-area p-5 profile-content">
 							@if (this?.User?.Identity?.IsAuthenticated ?? false)
 							{
+								<div class="head-area">
+									<div class="d-flex gap-3 align-items-center">
+										<div class="avatar-item">
+											<img class="avatar-img max-un" src=@ViewData["UserProfilePhoto"] alt="avatar" width="48">
+										</div>
+										<div class="text-area">
+											<h6 class="m-0 mb-1">@(this.User?.Identity?.Name ?? "Guest")</h6>
+										</div>
+									</div>
+								</div>
+							}
+							else
+							{
+								<div class="head-area">
+									<div class="d-flex gap-3 align-items-center">
+										<div class="avatar-item">
+											<img class="avatar-img max-un" src=\images\avatar-7.png alt="avatar">
+										</div>
+										<div class="text-area">
+											<h6 class="m-0 mb-1">@(this.User?.Identity?.Name ?? "Guest")</h6>
+										</div>
+									</div>
+								</div>
+							}
+							@if (this?.User?.Identity?.IsAuthenticated ?? false)
+							{
+
 
 								<div class="view-profile my-2">
 									<a href="/User/OtherProfile/" class="mdtxt w-100 text-center py-2">View profile</a>

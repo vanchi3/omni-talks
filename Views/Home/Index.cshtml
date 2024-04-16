@@ -28,6 +28,7 @@
                 @{
                     SideBarViewModel model = new SideBarViewModel();
                     model.Id = ViewBag.CurrentUserId;
+                    model.ProfilePhoto = ViewBag.ProfilePhoto;
                 }
                 <partial name="_ProfileSideBarForm" model="model" />
             </div>

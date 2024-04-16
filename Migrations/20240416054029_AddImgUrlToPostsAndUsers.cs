@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OmniTalks.Migrations
 {
     /// <inheritdoc />
-    public partial class AddPhtosToPOstAndUsers : Migration
+    public partial class AddImgUrlToPostsAndUsers : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,14 +23,14 @@ namespace OmniTalks.Migrations
                 table: "AspNetUsers",
                 type: "nvarchar(max)",
                 nullable: false,
-                defaultValueSql: "C:\\Users\\Ivana\\Desktop\\Dimplomen Proekt\\OmniTalks\\wwwroot\\images\\avatar-7.png");
+                defaultValue: "/images/avatar-7.png");
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: new Guid("6171a065-a985-43f1-ba4c-0703775e2dc4"),
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "3ccff30f-0aec-43d7-b6ef-bf56d08d0591", "AQAAAAIAAYagAAAAEKIAEnOjr3w5XvMCAuKtH0d1CbvROyX3jv8ztCMY6xkRcZj0Kqa1HQISIQjdJb1DKQ==", "eee941b5-9663-450c-b6ca-bd9058cf93e0" });
+                values: new object[] { "e7e9f51a-0ef6-4204-b131-5c474d52b6b9", "AQAAAAIAAYagAAAAEL4JmMMESPtOCMfGu/yRyzdAfpb+n6Ryf0qj44yX48duhP8aUUcg1X71cnC3mub+Pw==", "afe27c44-969a-4acf-8882-c55fdab28ff6" });
         }
 
         /// <inheritdoc />

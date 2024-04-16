@@ -13,7 +13,9 @@ namespace OmniTalks.Models.UserViewModels
 
 		public string? Email { get; set; }
 
-		public string? Password { get; set; }
+        public string? ProfilePhoto { get; set; }
+
+        public string? Password { get; set; }
 
 		public string? ConfirmPassword { get; set; }
 	}

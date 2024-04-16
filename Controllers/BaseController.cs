@@ -16,6 +16,7 @@ namespace OmniTalks.Controllers
 			{
 				List<HeaderChatViewModel> chats = await service.ShowAllChats(new Guid(CurrentUserId));
 				controller.ViewData["HeaderChatsMessages"] = chats;
+				controller.ViewData["UserProfilePhoto"] = UserProfilePhoto;
 			}
 
 
@@ -41,6 +42,18 @@ namespace OmniTalks.Controllers
 				return nameId;
 			}
 		}
+
+		public string UserProfilePhoto
+		{
+			get
+			{
+				string? profilePhoto = User?.Claims?.FirstOrDefault(x => x.Type == "user-profile-photo")?.Value;
+				profilePhoto = profilePhoto ?? "/images/avatar-7.png";
+
+				return profilePhoto;
+			}
+		}
+
 
 		public bool IsAdmin
 		{

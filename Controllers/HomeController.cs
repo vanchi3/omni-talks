@@ -23,10 +23,11 @@ namespace OmniTalks.Controllers
         {
             ViewBag.Username = UserName;
             ViewBag.CurrentUserId = new Guid(CurrentUserId);
+            ViewBag.ProfilePhoto = UserProfilePhoto;
 
             List<CategoryViewModel> categories = await _categoryService.GetAll();
             this.ViewBag.CategoriesList = new SelectList(categories, "Id", "Name");
-            
+
             List<PostViewModel> models = await this._postService.All();
 
             return View(models);

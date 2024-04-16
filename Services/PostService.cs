@@ -37,7 +37,7 @@ namespace OmniTalks.Services
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task<List<PostViewModel>> All(Guid? userId = null)
+		public async Task<List<PostViewModel>> All( Guid? userId = null)
 		{
 			List<PostViewModel> postViewModels = await _context.Posts
 				.Include(p => p.PostLikes)
@@ -53,6 +53,7 @@ namespace OmniTalks.Services
 					UserName = p.User.UserName,
 					UserId = p.User.Id,
 					CreatedDate = p.CreatedDate,
+					UserPhotoUrl = p.User.ProfilePhtotoUrl,
 					Comments = p.Comments.Select(c => new CommentViewModel()
 					{
 						Id = c.Id,

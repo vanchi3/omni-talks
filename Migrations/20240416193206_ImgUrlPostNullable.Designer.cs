@@ -12,8 +12,8 @@ using OmniTalks.Data;
 namespace OmniTalks.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240416050255_AddPhtosToPOstAndUsers")]
-    partial class AddPhtosToPOstAndUsers
+    [Migration("20240416193206_ImgUrlPostNullable")]
+    partial class ImgUrlPostNullable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -323,7 +323,6 @@ namespace OmniTalks.Migrations
                         .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("ImgUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("UserId")
@@ -408,7 +407,7 @@ namespace OmniTalks.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(max)")
-                        .HasDefaultValueSql("C:\\Users\\Ivana\\Desktop\\Dimplomen Proekt\\OmniTalks\\wwwroot\\images\\avatar-7.png");
+                        .HasDefaultValue("/images/avatar-7.png");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -437,7 +436,7 @@ namespace OmniTalks.Migrations
                         {
                             Id = new Guid("6171a065-a985-43f1-ba4c-0703775e2dc4"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3ccff30f-0aec-43d7-b6ef-bf56d08d0591",
+                            ConcurrencyStamp = "e1df813c-1aef-4148-8105-e517f5f7ea9b",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             FirstName = "admin@mail.com",
@@ -445,9 +444,9 @@ namespace OmniTalks.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@mail.com",
                             NormalizedUserName = "admin@mail.com",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKIAEnOjr3w5XvMCAuKtH0d1CbvROyX3jv8ztCMY6xkRcZj0Kqa1HQISIQjdJb1DKQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL2kiqWmXkhsA9ayzGPiakNGRK9sooKL/9zCZOvh2tUz/G2NwcJngT5geHqpVy3Lpw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "eee941b5-9663-450c-b6ca-bd9058cf93e0",
+                            SecurityStamp = "6228a960-67f4-444e-ae0f-2491d84203c7",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });

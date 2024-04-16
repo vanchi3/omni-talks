@@ -11,6 +11,7 @@ using OmniTalks.Models.Domein;
 using OmniTalks.Models.PostViewModel;
 using OmniTalks.Models.UserViewModels;
 using OmniTalks.Services;
+using System.Security.Claims;
 
 namespace OmniTalks.Controllers
 {
@@ -91,11 +92,6 @@ namespace OmniTalks.Controllers
 		[AllowAnonymous]
 		public IActionResult Login()
 		{
-			if (User?.Identity?.IsAuthenticated ?? false)
-			{
-				return RedirectToAction("Home", "Index");
-			}
-
 			var model = new LoginViewModel();
 
 			return View(model);
@@ -116,6 +112,8 @@ namespace OmniTalks.Controllers
 
 				if (result.Succeeded)
 				{
+					await _userManger.AddClaimAsync(user, new Claim("user-profile-photo", user.ProfilePhtotoUrl));
+
 					return RedirectToAction("Index", "Home");
 				}
 			}
