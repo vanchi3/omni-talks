@@ -9,5 +9,7 @@
 		public string UserName { get; set; }
 
 		public int LikesCount { get; set; }
+
+		public string ImgUrl { get; set; }
 	}
 }

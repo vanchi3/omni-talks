@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OmniTalks.Data;
 
@@ -11,9 +12,11 @@ using OmniTalks.Data;
 namespace OmniTalks.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240423200922_ChangedFollowNames")]
+    partial class ChangedFollowNames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -257,20 +260,20 @@ namespace OmniTalks.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("FollowedId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("FollowerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsFollowing")
                         .HasColumnType("bit");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("FollowedId");
-
                     b.HasIndex("FollowerId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Follows");
                 });
@@ -433,7 +436,7 @@ namespace OmniTalks.Migrations
                         {
                             Id = new Guid("6171a065-a985-43f1-ba4c-0703775e2dc4"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "64483e51-10ce-4a39-bc93-0f37c9312f0d",
+                            ConcurrencyStamp = "99126af6-f2c4-42e6-9184-12d4fc26455f",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             FirstName = "admin@mail.com",
@@ -441,9 +444,9 @@ namespace OmniTalks.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@mail.com",
                             NormalizedUserName = "admin@mail.com",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAD7IFZD5zU3fLluKor5rgbYLZ88y3EAjErjv9PptTMg+3uPVY5I1/IF5+8bawq10g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJ23zOPIZNynTli7lj0zpGwtRleVHW6wg0DwmGwlCKY8m9KGYshpEPWmttiqfrLdNg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c5b177dd-8604-4dd6-8870-3106eb48e8c7",
+                            SecurityStamp = "4822551d-ddda-4955-b8ad-c726463648c2",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });
@@ -559,21 +562,21 @@ namespace OmniTalks.Migrations
 
             modelBuilder.Entity("OmniTalks.Models.Domein.Follow", b =>
                 {
-                    b.HasOne("OmniTalks.Models.Domein.User", "Followed")
-                        .WithMany("Followed")
-                        .HasForeignKey("FollowedId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("OmniTalks.Models.Domein.User", "Follower")
                         .WithMany("Followers")
                         .HasForeignKey("FollowerId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("Followed");
+                    b.HasOne("OmniTalks.Models.Domein.User", "User")
+                        .WithMany("Followed")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("Follower");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("OmniTalks.Models.Domein.Message", b =>

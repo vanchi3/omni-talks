@@ -19,7 +19,7 @@ namespace OmniTalks.Models.Domein
 
 		public List<Post> Posts { get; set; } = [];
 
-		public List<Follow> Following { get; set; }
+		public List<Follow> Followed { get; set; }
 
 		public List<Follow> Followers { get; set; }
 

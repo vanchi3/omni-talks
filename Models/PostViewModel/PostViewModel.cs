@@ -1,5 +1,6 @@
 ﻿using OmniTalks.Models.CommentViewModels;
 using OmniTalks.Models.CategoryViewModels;
+using OmniTalks.Models.UserViewModels;
 
 namespace OmniTalks.Models.PostViewModel
 {
@@ -27,5 +28,6 @@ namespace OmniTalks.Models.PostViewModel
 
         public List<CategoryViewModel> Categories { get; set; }
 		public List<CommentViewModel> Comments { get; set; }
+		public FollowerViewModel UsersContacs { get; set; }
 	}
 }

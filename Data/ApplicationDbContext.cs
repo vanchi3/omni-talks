@@ -19,7 +19,7 @@ namespace OmniTalks.Data
 		public DbSet<Comment> Comments { get; set; }
 		public DbSet<CommentLike> CommentsLikes { get; set; }
 		public DbSet<Chat> Chats { get; set; }
-		public DbSet<Follow> Following { get; set; }
+		public DbSet<Follow> Follows { get; set; }
 		public DbSet<Category> Categories { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder builder)
@@ -56,9 +56,9 @@ namespace OmniTalks.Data
 				.OnDelete(DeleteBehavior.NoAction);
 
 			builder.Entity<User>()
-				.HasMany(u => u.Following)
-				.WithOne(f => f.User)
-				.HasForeignKey(f => f.UserId)
+				.HasMany(u => u.Followed)
+				.WithOne(f => f.Followed)
+				.HasForeignKey(f => f.FollowedId)
 				.OnDelete(DeleteBehavior.NoAction);
 
 			builder.Entity<User>()

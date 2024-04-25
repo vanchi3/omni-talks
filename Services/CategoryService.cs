@@ -37,7 +37,6 @@ namespace OmniTalks.Services
 				Id = x.Id,
 				Name = x.Name,
 				Bio = x.Bio
-
 			}).ToListAsync();
 
 			return categories;

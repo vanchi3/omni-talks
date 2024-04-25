@@ -15,7 +15,12 @@ namespace OmniTalks
 			// Add services to the container.
 			var connectionString = builder.Configuration.GetConnectionString("OmniTalkConnection") ?? throw new InvalidOperationException("Connection string 'OmniTalkConnection' not found.");
 			builder.Services.AddDbContext<ApplicationDbContext>(options =>
-				options.UseSqlServer(connectionString));
+			{
+				options.UseSqlServer(connectionString, opt => {
+					opt.CommandTimeout(60);
+					opt.EnableRetryOnFailure();
+				});
+			});
 			builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 

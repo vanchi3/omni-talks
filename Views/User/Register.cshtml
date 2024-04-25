@@ -47,10 +47,8 @@
 				<span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
 			</div>
 			<div class="text-center">
-				<div>
-					<button id="registerSubmit" type="submit" class="btn btn-primary">Register</button>
-				</div>
-				<div> <button asp-controller="User" asp-action="Login" class="btn btn-primary">Login</button></div>
+				<button id="login-submit" type="submit" class="btn btn-primary">Register</button>
+				<button asp-controller="User" asp-action="Login" class="btn btn-primary">Log in</button>
 			</div>
 		</form>
 	</div>

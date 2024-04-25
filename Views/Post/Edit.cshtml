@@ -1,127 +1,47 @@
 ﻿@using OmniTalks.Models.PostViewModel
 @model PostViewModel
 
-@* <div class="share-post d-flex gap-3 gap-sm-5 p-3 p-sm-5 gap-5 gap-md-7 container-no-bottom-margin">
-	<div class="profile-box gap-5 gap-md-7 container-no-bottom-margin">
-		<a href="#"><img src="/images/add-post-avatar.png" class="max-un" alt="icon"></a>
-	</div>
-	<div asp-for="" class="input-area first container">
-		<select class="form-control" data-val="true" data-val-required="The CategoryId field is required." id="CategoryId" name="CategoryId" style="display: none;">
-			<option value="52b891a5-48cc-4e3f-0e19-08dc5c89a788">Everyday</option>
-			<option value="9af70a94-594a-4d80-8a4d-ae63b355f7e4">TestName</option>
-		</select><div class="nice-select form-control" tabindex="0"><span class="current">Everyday</span><ul class="list"><li data-value="52b891a5-48cc-4e3f-0e19-08dc5c89a788" class="option selected">Everyday</li><li data-value="9af70a94-594a-4d80-8a4d-ae63b355f7e4" class="option">TestName</li></ul></div>
-	</div>
-	<form asp-action="Edit" asp-controller="Post" class="w-100 position-relative gap-5 gap-md-7 container-no-bottom-margin">
-		<textarea asp-for="Content" cols="10" rows="2" placeholder=@Model.Content></textarea>
-		<div class="abs-area position-absolute d-none d-sm-block">
-			<i class="material-symbols-outlined mat-icon xxltxt"> sentiment_satisfied </i>
-		</div>
-		<ul class="d-flex justify-content-between flex-wrap mt-3 gap-3">
-			<li class="d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#goLiveMod">
-				<img src="/images/icon/live-video.png" class="max-un" alt="icon">
-				<span>Live</span>
-			</li>
-			<li class="d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#photoVideoMod">
-				<img src="/images/icon/vgallery.png" class="max-un" alt="icon">
-				<span>Photo/Video</span>
-			</li>
-			<li class="d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#activityMod">
-				<img src="/images/icon/emoji-laughing.png" class="max-un" alt="icon">
-				<span>Fallings/Activity</span>
-			</li>
-			<li>
-				<button class="cmn-btn px-2 px-sm-5 px-lg-6">
-					<i class="material-symbols-outlined mat-icon m-0 fs-xxl"> near_me </i>
-				</button>
-			</li>
-		</ul>
-	</form>
-</div> *@
 <form asp-action="Edit" asp-controller="Post">
 	<div class="container">
 		<div class="row">
-			<div class="col-xl-3 col-lg-4">
-				<div class="profile-sidebar cus-scrollbar p-5">
-					<div class="d-block d-lg-none position-absolute end-0 top-0">
-						<button class="button profile-close">
-							<i class="material-symbols-outlined mat-icon fs-xl"> close </i>
-						</button>
+			<div class="col-xl-3 col-lg-4 full-widt">
+				<div class="d-block d-lg-none position-absolute end-0 top-0">
+					<button class="button profile-close">
+						<i class="material-symbols-outlined mat-icon fs-xl"> close </i>
+					</button>
+				</div>
+				<div class="head-area mb-5">
+					<h5>Edit Post</h5>
+				</div>
+				<div class="profile-picture d-flex gap-2 mb-5 align-items-center">
+					<div class="avatar position-relative">
+						<img class="avatar-img max-un" src="assets/images/avatar-1.png" alt="avatar">
 					</div>
-					<div class="head-area mb-5">
-						<h5>Edit Post</h5>
+					<div class="text-area">
+						<h6 class="m-0 mb-1"><a href="profile-post.html">@Model.UserName</a></h6>
 					</div>
-					<div class="profile-picture d-flex gap-2 mb-5 align-items-center">
-						<div class="avatar position-relative">
-							<img class="avatar-img max-un" src="assets/images/avatar-1.png" alt="avatar">
-						</div>
-						<div class="text-area">
-							<h6 class="m-0 mb-1"><a href="profile-post.html">@Model.UserName</a></h6>
-						</div>
-					</div>
-					<div class="input-area second">
-						<input type="text" placeholder="Page name">
-					</div>
-					<div asp-for="" class="input-area first">
-						<select class="form-control" data-val="true" data-val-required="The CategoryId field is required." id="CategoryId" name="CategoryId" style="display: none;">
-							<option value="52b891a5-48cc-4e3f-0e19-08dc5c89a788">Everyday</option>
-							<option value="9af70a94-594a-4d80-8a4d-ae63b355f7e4">TestName</option>
-						</select><div class="nice-select form-control" tabindex="0"><span class="current">Everyday</span><ul class="list"><li data-value="52b891a5-48cc-4e3f-0e19-08dc5c89a788" class="option selected">Everyday</li><li data-value="9af70a94-594a-4d80-8a4d-ae63b355f7e4" class="option">TestName</li></ul></div>
-					</div>
-					<div class="input-area second">
-						<textarea asp-for="Content" cols="10" rows="2" placeholder=@Model.Content></textarea>
-						<div class="abs-area position-absolute d-none d-sm-block">
-							<i class="material-symbols-outlined mat-icon xxltxt"> sentiment_satisfied </i>
-						</div>
-					</div>
-					<div class="btn-area text-end">
-						<button class="cmn-btn">Next</button>
+				</div>>
+				<div asp-for="" class="input-area first">
+					<select class="form-control h" data-val="true" data-val-required="The CategoryId field is required." id="CategoryId" name="CategoryId" style="display: none;">
+						<option value="52b891a5-48cc-4e3f-0e19-08dc5c89a788">Everyday</option>
+						<option value="9af70a94-594a-4d80-8a4d-ae63b355f7e4">TestName</option>
+					</select><div class="nice-select form-control" tabindex="0"><span class="current">Everyday</span>
+						<ul class="list">
+						<li data-value="52b891a5-48cc-4e3f-0e19-08dc5c89a788" class="option selected">Everyday</li>
+						<li data-value="9af70a94-594a-4d80-8a4d-ae63b355f7e4" class="option">TestName</li>
+					</ul>
 					</div>
 				</div>
-			</div>
-</form>
-@* <div class="col-xl-9 col-lg-8">
-	<div class="banner-area create-group pages-create mb-5">
-		<div class="single-box p-5">
-			<div class="avatar-area position-relative">
-				<img class="avatar-img w-100" src="assets/images/create-page-cover.png" alt="avatar">
-				<div class="abs-area w-100 position-absolute bottom-0 p-3 d-center justify-content-end">
-					<form action="#">
-						<div class="file-upload">
-							<label class="file mt-1">
-								<input type="file">
-								<span class="file-custom bg-transparent border-0 p-3 d-grid text-center">
-									<p class="cmn-btn">Select Photo</p>
-								</span>
-							</label>
-						</div>
-					</form>
+				<div class="input-area second full-widt" >
+					<textarea asp-for="Content" cols="10" rows="2" placeholder=@Model.Content></textarea>
 				</div>
-			</div>
-			<div class="top-area py-4 px-5 d-center flex-wrap gap-3 justify-content-between">
-				<div class="d-grid gap-4 align-items-center">
-					<div class="abs-avatar-item m-0">
-						<form action="#">
-							<div class="file-upload">
-								<label class="file mt-1">
-									<input type="file">
-									<span class="file-custom border-0 px-3 py-6 d-grid text-center">
-										<span class="material-symbols-outlined mat-icon fs-xxxl"> perm_media </span>
-										<span class="mdtxt">Group Profile</span>
-									</span>
-								</label>
-							</div>
-						</form>
-					</div>
-					<div class="text-area text-start">
-						<h5 class="m-0 mb-1">Page Name</h5>
-					</div>
+				<div class="btn-area text-end">
+					<button class="cmn-btn">Next</button>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-	</div>
-</div> *@
+</form>
 @section Scripts {
 	<partial name="_ValidationScriptsPartial">
 }

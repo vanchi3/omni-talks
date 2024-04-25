@@ -156,6 +156,5 @@ namespace OmniTalks.Controllers
 
 			return View(model);
 		}
-
 	}
 }

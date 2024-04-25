@@ -12,9 +12,9 @@ namespace OmniTalks.Models.Domein
 
 		[ForeignKey(nameof(User))]
 
-		public Guid UserId { get; set; }
+		public Guid FollowedId { get; set; }
 
-		public User User { get; set; }
+		public User Followed { get; set; }
 
 		[ForeignKey(nameof(Follower))]
 

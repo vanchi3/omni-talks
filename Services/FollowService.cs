@@ -25,26 +25,26 @@ namespace OmniTalks.Services
 			{
 				Follow follow = new Follow();
 				follow.Id = Guid.NewGuid();
-				follow.UserId = model.UserId;
+				follow.FollowedId = model.UserId;
 				follow.FollowerId = userId;
 				follow.IsFollowing = true;
 
-				await _context.Following.AddAsync(follow);
+				await _context.Follows.AddAsync(follow);
 				await _context.SaveChangesAsync();
 			}
 		}
 
 		public async Task Remove(FollowerViewModel model, Guid userId)
 		{
-			Follow? follow = await _context.Following
-				.FirstOrDefaultAsync(f => f.FollowerId == userId && model.UserId == f.UserId);
+			Follow? follow = await _context.Follows
+				.FirstOrDefaultAsync(f => f.FollowerId == userId && model.UserId == f.FollowedId);
 
 			if (follow == null)
 			{
 				throw new ArgumentNullException();
 			}
 
-			_context.Following.Remove(follow);
+			_context.Follows.Remove(follow);
 			await _context.SaveChangesAsync();
 		}
 	}

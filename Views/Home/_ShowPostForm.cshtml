@@ -9,7 +9,7 @@
 				<div class="profile-area d-center justify-content-between">
 					<div class="avatar-item d-flex gap-3 align-items-center">
 						<div class="avatar position-relative">
-							<img src=@Url.Content(item.UserPhotoUrl.ToString()) class="avatar-img max-un" alt="avatar" width="48">
+							<img src=@Url.Content(item.UserPhotoUrl.ToString()) class="avatar-img max-un " alt="avatar" width="48">
 						</div>
 						<div class="info-area">
 							<h6 class="m-0"><a href="@($"User/OtherProfile/{item.UserId}")">@item.UserName</a></h6>
@@ -71,6 +71,7 @@
 			@{
 				AddCommentViewModel addCommentViewModel = new AddCommentViewModel();
 				addCommentViewModel.PostId = item.Id;
+				addCommentViewModel.ImgUrl = ViewBag.ProfilePhoto;
 			}
 			<partial name="_AddComment" model="addCommentViewModel">
 

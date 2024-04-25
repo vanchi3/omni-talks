@@ -3,7 +3,7 @@
 <form asp-action="Add" asp-controller="Comment" method="post">
 	<div class="d-flex mt-5 gap-3">
 		<div class="profile-box d-none d-xxl-block">
-			<a href="#"><img src="@Model" class="max-un" alt="icon"></a>
+			<a href="#"><img src=@Url.Content(Model.ImgUrl.ToString()) class="max-un" alt="icon" width="48"></a>
 		</div>
 		<div class="form-content input-area py-1 d-flex gap-2 align-items-center w-100">
 			<input placeholder="Write a comment.." asp-for="Text" />

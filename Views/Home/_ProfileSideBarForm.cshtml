@@ -40,13 +40,13 @@
 		<li>
 			<a href="pages.html" class="d-flex gap-4">
 				<i class="material-symbols-outlined mat-icon"> perm_media </i>
-				<span>Pages</span>
+				<span>Profile</span>
 			</a>
 		</li>
 		<li>
 			<a href="saved-post.html" class="d-flex gap-4">
 				<i class="material-symbols-outlined mat-icon"> sync_saved_locally </i>
-				<span>Saved</span>
+				<span>Messages</span>
 			</a>
 		</li>
 		@if (this.User.IsInRole("Admin"))
@@ -59,13 +59,6 @@
 					</button>
 				</form>
 			</li>
-
 		}
-		<li>
-			<a href="setting.html" class="d-flex gap-4">
-				<i class="material-symbols-outlined mat-icon"> settings </i>
-				<span>Settings</span>
-			</a>
-		</li>
 	</ul>
 </div>

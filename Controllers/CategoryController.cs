@@ -14,6 +14,7 @@ namespace OmniTalks.Controllers
 		{
 			_service = service;
 		}
+		[HttpGet]
 		public IActionResult Add()
 		{
 			CategoryViewModel model = new CategoryViewModel();
