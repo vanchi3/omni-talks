@@ -33,7 +33,7 @@ namespace OmniTalks.Controllers
             this.ViewBag.CategoriesList = new SelectList(categories, "Id", "Name");
             List<PostViewModel> models = await this._postService.All();
             List<UserViewModel> friends = await this._userService.Friends(new Guid(CurrentUserId));
-			this.ViewBag.FriendsList = new SelectList(friends, "Id", "Name", "ProfilePhotoUrl");
+			this.ViewBag.FriendsList = friends;
 
 			return View(models);
         }

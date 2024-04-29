@@ -62,29 +62,37 @@ namespace OmniTalks.Services
 
             return model;
         }
-       //Id = x.Id,
-       //FollowerId = x.FollowerId,
-       //        UserId = x.UserId,
-       //        IsFollowing= x.IsFollowing,
+        //Id = x.Id,
+        //FollowerId = x.FollowerId,
+        //        UserId = x.UserId,
+        //        IsFollowing= x.IsFollowing,
         public async Task<List<UserViewModel>> Friends(Guid currentUserId)
         {
 
-            List<UserViewModel> mutualFollowers = await this._context.Users
-                .Where(u => u.Id == currentUserId)
-                .Include(u => u.Followers)
+            var user = this._context.Users
+            .Where(u => u.Id == currentUserId);
+
+            var followed = user
                 .Include(u => u.Followed)
-                .Select(u => u.Followers.Intersect(u.Followed))
-                .SelectMany(f => f)
-                .Select(f => f.FollowedId == currentUserId ? f.Follower : f.Followed)
-                .Select(u => new UserViewModel()
+                .ThenInclude(f => f.Follower)
+                .SelectMany(u => u.Followed);
+
+            var followers = user
+                .Include(u => u.Followers)
+                .ThenInclude(f => f.Followed)
+                .SelectMany(u => u.Followers);
+
+            var friends = await followed
+                .Where(fd => followers.Select(frs => frs.FollowedId).Contains(fd.FollowerId))
+                .Select(f => new UserViewModel()
                 {
-                    Id = u.Id,
-                    UserName = u.UserName,
-                    ProfilePhotoUrl = u.ProfilePhtotoUrl
+                    Id = f.Follower.Id,
+                    UserName = f.Follower.UserName,
+                    ProfilePhotoUrl = f.Follower.ProfilePhtotoUrl
                 })
                 .ToListAsync();
 
-            return mutualFollowers;
+            return friends;
         }
     }
 }

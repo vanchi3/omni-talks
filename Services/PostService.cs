@@ -13,18 +13,17 @@ namespace OmniTalks.Services
 	public class PostService : IPostService
 	{
 		private readonly ApplicationDbContext _context;
-		private readonly UserManager<User> _userManger;
 
-		public PostService(ApplicationDbContext context, UserManager<User> userManger)
+		public PostService(ApplicationDbContext context)
 		{
 			_context = context;
-			_userManger = userManger;
 		}
 
 		public async Task Add(PostViewModel model, string currentId)
 		{
 			Post post = new Post()
 			{
+			
 				Id = Guid.NewGuid(),
 				Content = model.Content,
 				UserId = Guid.Parse(currentId),

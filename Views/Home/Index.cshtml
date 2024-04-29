@@ -49,7 +49,7 @@
                     <div class="cus-scrollbar side-wrapper">
                         <div class="sidebar-wrapper d-flex flex-column gap-6">
                             @{
-                                List<UserViewModel> users = ViewBag.FriendsList;
+                                List<UserViewModel> users = ViewBag.FriendsList as List<UserViewModel>;
                              
                             }
                             <partial name="_FriendList" model="users">
