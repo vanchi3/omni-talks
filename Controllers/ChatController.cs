@@ -8,13 +8,11 @@ namespace OmniTalks.Controllers
 	[Authorize]
 	public class ChatController : BaseController
 	{
-		private IMessageService _messageService;
 		private IChatService _chatService;
 		private IUserService _userService;
 
-		public ChatController(IMessageService messageService, IChatService chatService, IUserService userService)
+		public ChatController(IChatService chatService, IUserService userService)
 		{
-			_messageService = messageService;
 			_chatService = chatService;
 			_userService = userService;
 		}

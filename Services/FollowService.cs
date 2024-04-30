@@ -6,7 +6,7 @@ using OmniTalks.Models.UserViewModels;
 
 namespace OmniTalks.Services
 {
-	public class FollowService : IFollowSrvice
+	public class FollowService : IFollowService
 	{
 		private ApplicationDbContext _context;
 
@@ -24,7 +24,7 @@ namespace OmniTalks.Services
 			else
 			{
 				Follow follow = new Follow();
-				follow.Id = Guid.NewGuid();
+				follow.Id = model.Id == default ? Guid.NewGuid() : model.Id;
 				follow.FollowedId = model.UserId;
 				follow.FollowerId = userId;
 				follow.IsFollowing = true;

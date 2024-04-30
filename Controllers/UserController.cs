@@ -72,7 +72,7 @@ namespace OmniTalks.Controllers
 				LastName = model.LastName,
 				Email = model.Email,
 				UserName = model.UserName,
-				ProfilePhtotoUrl = model.ProfilePhotoUrl
+				ProfilePhоtoUrl = model.ProfilePhotoUrl
 				
 			};
 			var result = await _userManger.CreateAsync(user, model.Password);
@@ -112,7 +112,7 @@ namespace OmniTalks.Controllers
 
 				if (result.Succeeded)
 				{
-					await _userManger.AddClaimAsync(user, new Claim("user-profile-photo", user.ProfilePhtotoUrl));
+					await _userManger.AddClaimAsync(user, new Claim("user-profile-photo", user.ProfilePhоtoUrl));
 
 					return RedirectToAction("Index", "Home");
 				}
@@ -149,9 +149,8 @@ namespace OmniTalks.Controllers
 			ViewBag.Username = UserName;
 			ViewBag.CurrentUserId = new Guid(CurrentUserId);
 
-			List<PostViewModel> models = await this._postService.All(id);
 
-			FollowerViewModel model = await _userService.FollowerAndFollowingDistribution(new Guid(CurrentUserId), id, models);
+			FollowerViewModel model = await _userService.FollowerAndFollowingDistribution(new Guid(CurrentUserId), id);
 			var contains = await _userService.Conatins(id, model);
 
 			return View(model);

@@ -36,7 +36,7 @@ namespace OmniTalks.Services
             return contains;
         }
 
-        public async Task<FollowerViewModel> FollowerAndFollowingDistribution(Guid currentUserId, Guid id, List<PostViewModel> models)
+        public async Task<FollowerViewModel> FollowerAndFollowingDistribution(Guid currentUserId, Guid id)
         {
             FollowerViewModel model = new FollowerViewModel
             {
@@ -55,9 +55,8 @@ namespace OmniTalks.Services
                     .Select(u => new UserViewModel()
                     {
                         UserName = u.UserName,
-                        ProfilePhotoUrl = u.ProfilePhtotoUrl
+                        ProfilePhotoUrl = u.ProfilePhоtoUrl
                     }).FirstOrDefaultAsync(),
-                MyPosts = models
             };
 
             return model;
@@ -88,7 +87,7 @@ namespace OmniTalks.Services
                 {
                     Id = f.Follower.Id,
                     UserName = f.Follower.UserName,
-                    ProfilePhotoUrl = f.Follower.ProfilePhtotoUrl
+                    ProfilePhotoUrl = f.Follower.ProfilePhоtoUrl
                 })
                 .ToListAsync();
 

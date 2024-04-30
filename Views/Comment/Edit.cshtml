@@ -4,7 +4,7 @@
 	<form class="container-no-bottom-margin" asp-action="Edit" asp-controller="Comment" method="post">
 		<div class="d-flex mt-5 gap-3">
 			<div class="profile-box d-none d-xxl-block">
-				<a href="#"><img src="/images/avatar-11.png" class="max-un" alt="icon"></a>
+				<a href="#"><img src=@Url.Content(Model.ImgUrl.ToString()) alt="avatar" class="max-un" alt="icon"></a>
 			</div>
 			<textarea asp-for="Text" cols="10" rows="2" placeholder="Write something to Luigi.."></textarea>
 			<ul class="d-flex justify-content-between flex-wrap mt-3 gap-3 container-no-bottom-margin">

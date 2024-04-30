@@ -8,9 +8,9 @@ namespace OmniTalks.Controllers
 	[Authorize]
 	public class FollowController : BaseController
 	{
-		private IFollowSrvice _service;
+		private IFollowService _service;
 
-		public FollowController(IFollowSrvice service)
+		public FollowController(IFollowService service)
 		{
 			_service = service;
 		}

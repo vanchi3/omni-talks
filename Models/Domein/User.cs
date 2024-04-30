@@ -25,7 +25,7 @@ namespace OmniTalks.Models.Domein
 
 		//public string BackgroudPhotoUrl {  get; set; }
 
-		public string ProfilePhtotoUrl { get; set; }
+		public string ProfilePhоtoUrl { get; set; }
 		// ako sh triesh useri taka ->
 		//public bool IsDeleted{ get; set; }
 	}
