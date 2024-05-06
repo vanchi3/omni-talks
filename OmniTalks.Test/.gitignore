@@ -485,6 +485,3 @@ $RECYCLE.BIN/
 
 # Ignoring node modules
 node_modules
-
-appsettings.json
-appsettings.*.json
