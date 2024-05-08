@@ -32,15 +32,12 @@
 			</a>
 		</li>
 		<li>
-			<a href="friend-request.html" class="d-flex gap-4">
-				<i class="material-symbols-outlined mat-icon"> person </i>
-				<span>People</span>
-			</a>
-		</li>
-		<li>
-			<a href="pages.html" class="d-flex gap-4">
-				<i class="material-symbols-outlined mat-icon"> perm_media </i>
-				<span>Profile</span>
+			@{
+				string hrefSide = $"User/OtherProfile/{Model.Id}";
+			}
+			 <a href="@hrefSide" class="d-flex gap-4">
+				<i class="material-symbols-outlined mat-icon"> perm_media </i> 
+				Profile
 			</a>
 		</li>
 		<li>
