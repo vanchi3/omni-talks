@@ -61,7 +61,7 @@
 					<div class="main">
 						<div class="chat-head py-4 px-5 d-center justify-content-between">
 							<div class="d-flex gap-4 align-items-center">
-								<img src="/images/avatar-2.png" alt="image">
+								<img src=@Url.Content(Model.Reciever.ProfilePhоtoUrl.ToString()) alt="image">
 								<div class="profile-status">
 									<h5 class="m-0"><a href="public-profile-post.html" class="m-0">@Model.Reciever.UserName</a></h5>
 									<span class="mdtxt">online</span>
@@ -79,7 +79,7 @@
 											<span class="mdtxt">@message.SentTime</span>
 										</div>
 										<div class="entete">
-											<img src="/images/avatar-1.png" alt="image">
+											<img src=@ViewData["UserProfilePhoto"] alt="image">
 										</div>
 										<div class="btn-group cus-dropdown dropend">
 										</div>
@@ -89,7 +89,7 @@
 								{
 									<li class="you">
 										<div class="entete">
-											<img src="/images/avatar-2.png" alt="image">
+											<img src=@Url.Content(Model.Reciever.ProfilePhоtoUrl.ToString()) alt="image">
 										</div>
 										<div class="message">
 											<p>@message.Text<p>

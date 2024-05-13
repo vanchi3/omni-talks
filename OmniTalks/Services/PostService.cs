@@ -58,7 +58,7 @@ namespace OmniTalks.Services
                         Text = c.Text,
                         UserName = c.User.UserName,
                         LikesCount = c.CommentLikes.Count(),
-                        ImgUrl = p.User.ProfilePhоtoUrl,
+                        ImgUrl = c.User.ProfilePhоtoUrl
                     }).ToList(),
                     Category = new CategoryViewModel()
                     {
