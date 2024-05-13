@@ -31,13 +31,13 @@
 									<div class="single-box p-0 mb-7">
 										<a href="@($"/Chat/ShowChat/{item.UserId}")" class="d-flex gap-2 align-items-center">
 											<div class="avatar">
-												<img class="avatar-img max-un" src="/images/avatar-7.png" alt="avatar">
+												<img width="48" class="avatar-img max-un" src="@item.ProfileImgUrl" alt="avatar">
 											</div>
 											<div class="text-area">
 												<div class="title-area position-relative d-inline-flex align-items-center">
 													<h6 class="m-0 d-inline-flex">@item.Name</h6>
 												</div>
-												<p class=" mdtxt sms">@item.LastText</p>
+												<p class="mdtxt sms">@item.LastText</p>
 											</div>
 										</a>
 									</div>

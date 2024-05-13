@@ -20,13 +20,8 @@
 								<div class="text-area text-start">
 									<h5 class="m-0 mb-1">@Model.User.UserName</h5>
 									<div class="friends-list d-flex flex-wrap gap-2 align-items-center text-center">
-										<ul class="d-flex align-items-center justify-content-center">
-											<li><img src="/images/avatar-3.png" alt="image"></li>
-											<li><img src="/images/avatar-2.png" alt="image"></li>
-											<li><img src="/images/avatar-4.png" alt="image"></li>
-										</ul>
 										<span class="mdtxt d-center">@Model.Followers.Count Followers</span>
-										<span class="mdtxt d-center following">@Model.Following.Count Following</span>
+										<span class="mdtxt d-center following"> @Model.Following.Count Following</span>
 									</div>
 								</div>
 							</div>
@@ -94,7 +89,7 @@
 											</h6>
 										</div>
 									</div>
-									<a class="droplist d-flex align-items-center gap-2" href=@($"/Chat/ShowChat/{following.FollowerId}")>
+									<a class="droplist d-flex align-items-center gap-2" href=@($"/Chat/ShowChat/{following.FollowedId}")>
 										<i class="material-symbols-outlined mat-icon">mail</i>
 										<span></span>
 									</a>

@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OmniTalks.Contracs;
+using OmniTalks.Models.CategoryViewModels;
 using OmniTalks.Models.Domein;
 using OmniTalks.Models.PostViewModel;
+using OmniTalks.Services;
 
 namespace OmniTalks.Controllers
 {
@@ -56,8 +58,11 @@ namespace OmniTalks.Controllers
 			{
 				return RedirectToAction($"Index", "Home");
 			}
-			if (model.UserId == userId)
+			if (model.UserId == userId || this.User.IsInRole("Admin"))
 			{
+				List<CategoryViewModel> categories = await _catrgoryService.GetAll();
+				this.ViewBag.CategoriesList = new SelectList(categories, "Id", "Name");
+
 				return View(model);
 			}
 			else

@@ -120,15 +120,16 @@ namespace OmniTalks.Services
                 .Select(p => new HeaderChatViewModel()
                 {
                     Id = p.Id,
-                    UserId = currentUserId == p.User1Id
+					ProfileImgUrl = p.User1.ProfilePhоtoUrl,
+					UserId = currentUserId == p.User1Id
                         ? p.User2Id
                         : p.User1Id,
                     Name = p.User1Id != currentUserId ? p.User1.UserName : p.User2.UserName,
                     LastText = p.Messages
                         .OrderBy(m => m.SentTime)
                         .Select(m => m.Text)
-                        .LastOrDefault()
-                }).ToListAsync();
+                        .LastOrDefault(),
+				}).ToListAsync();
 
             return chats;
         }

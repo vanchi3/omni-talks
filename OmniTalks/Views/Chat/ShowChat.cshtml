@@ -22,7 +22,7 @@
 								<div class="profile-area d-center justify-content-between">
 									<div class="avatar-item d-flex mb-4 gap-3 align-items-center">
 										<div class="avatar-item">
-											<img class="avatar-img max-un" src="/images/avatar-1.png" alt="avatar">
+											<img class="avatar-img max-un" width="48" src=@ViewData["UserProfilePhoto"] alt="avatar">
 										</div>
 										<div class="info-area">
 											<h6 class="m-0">My Chats</h6>
@@ -39,7 +39,7 @@
 											<div class=@($"{activeStr} text-start d-flex justify-content-between chat-single  mb-2")>
 												<div class="d-flex gap-2 align-items-center">
 													<div class="avatar">
-														<img class="avatar-img max-un" src="/images/avatar-1.png" alt="avatar">
+														<img class="avatar-img max-un" src=@Url.Content(item.ProfileImgUrl.ToString()) alt="avatar" width="48">
 													</div>
 													<div class="text-area">
 														<h6 class="m-0 mb-1">@item.Name</h6>
